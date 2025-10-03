@@ -20,9 +20,9 @@
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-bottom: 1rem;
-    padding: 0.75rem;
-    background: rgba(139, 69, 19, 0.2);
-    border: 1px solid var(--color-secondary);
+    padding: var(--spacing-sm);
+    background: rgba(107, 68, 35, 0.2);
+    border: 1px solid var(--color-wood-light);
     border-radius: var(--border-radius-md);
     max-height: 120px;
     overflow-y: auto;
@@ -33,10 +33,10 @@
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
-    padding: 0.5rem 0.75rem;
-    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-brown-lightest) 100%);
-    color: var(--color-primary);
-    border: 2px solid var(--color-secondary);
+    padding: var(--spacing-sm) var(--spacing-sm);
+    background: linear-gradient(135deg, var(--color-wood-light) 0%, var(--color-amber) 100%);
+    color: var(--color-gold);
+    border: 2px solid var(--color-wood-light);
     border-radius: var(--border-radius-sm);
     font-family: 'Cinzel', serif;
     font-weight: 600;
@@ -50,25 +50,25 @@
 }
 
 .sheet-tab.add-tab {
-    background: linear-gradient(135deg, var(--color-success-light) 0%, var(--color-success-dark) 100%);
+    background: linear-gradient(135deg, #32cd32 0%, #228b22 100%);
     color: white;
-    border-color: var(--color-success-dark);
+    border-color: #228b22;
     min-width: 120px;
 }
 
 .sheet-btn.active {
-    background: linear-gradient(135deg, var(--color-error-light) 0%, var(--color-error-dark) 100%);
+    background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
     color: white;
 }
 
 .sheet-tab:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    box-shadow: var(--shadow-md);
 }
 
 .sheet-tab.active {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-    color: var(--color-bg-secondary);
+    background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-bronze) 100%);
+    color: var(--color-wood-dark);
     border-color: var(--color-gold);
 }
 
@@ -85,7 +85,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.3);
     border-radius: 50%;
     font-size: 12px;
     font-weight: bold;
@@ -93,7 +93,7 @@
 }
 
 .tab-close:hover {
-    background: var(--color-error-light);
+    background: #dc143c;
     color: white;
 }
 
@@ -103,37 +103,37 @@
     gap: 1rem;
     flex-wrap: wrap;
     padding-bottom: var(--spacing-md);
-    border-bottom: 2px solid var(--color-secondary);
+    border-bottom: 2px solid var(--color-wood-light);
     flex-shrink: 0;
 }
 
 /* FIXED: Sheet tabs styling */
 .sheet-tabs {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
     flex-wrap: wrap;
-    padding: 1rem;
-    background: rgba(139, 69, 19, 0.1);
-    border-radius: 8px;
-    border: 1px solid rgba(139, 69, 19, 0.3);
+    padding: var(--spacing-md);
+    background: rgba(107, 68, 35, 0.1);
+    border-radius: var(--border-radius-md);
+    border: 1px solid rgba(107, 68, 35, 0.3);
 }
 
 /* FIXED: Sheet tabs styling */
 .sheet-tabs {
     display: flex;
-    gap: 0.5rem;
+    gap: var(--spacing-sm);
     flex-wrap: wrap;
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-md);
 }
 
 .sheet-tab {
-    padding: 0.75rem 1.25rem;
-    border: 2px solid var(--color-brown-lighter);
-    border-radius: 8px;
-    background: linear-gradient(135deg, rgba(139, 69, 19, 0.4) 0%, rgba(160, 82, 45, 0.4) 100%);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: 2px solid var(--color-amber);
+    border-radius: var(--border-radius-md);
+    background: linear-gradient(135deg, rgba(107, 68, 35, 0.4) 0%, rgba(205, 133, 63, 0.4) 100%);
     color: var(--color-gold);
-    font-family: 'Cinzel', serif;
+    font-family: var(--font-decorative);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -142,7 +142,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: var(--shadow-sm);
 }
 
 .sheet-tab.active {
@@ -152,25 +152,25 @@
 }
 
 .sheet-tab:hover:not(.active) {
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(184, 148, 31, 0.3) 100%);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(205, 127, 50, 0.3) 100%);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    box-shadow: var(--shadow-md);
 }
 
 /* FIXED: Sheet controls buttons layout */
 .sheet-controls > div:last-child {
     display: flex;
-    gap: 0.5rem;
+    gap: var(--spacing-sm);
     flex-wrap: wrap;
 }
 
 .sheet-tab {
-    padding: 0.5rem 1rem;
-    border: 2px solid var(--color-brown-lighter);
-    border-radius: 6px;
-    background: rgba(139, 69, 19, 0.3);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 2px solid var(--color-amber);
+    border-radius: var(--border-radius-sm);
+    background: rgba(107, 68, 35, 0.3);
     color: var(--color-gold);
-    font-family: 'Cinzel', serif;
+    font-family: var(--font-decorative);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -183,7 +183,7 @@
 
 .sheet-tab.active {
     background: var(--color-gold);
-    color: var(--color-brown-medium);
+    color: var(--color-wood-dark);
 }
 
 .sheet-tab:hover:not(.active) {
@@ -192,11 +192,11 @@
 
 .sheet-btn {
     padding: var(--spacing-sm) var(--spacing-md);
-    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-brown-lightest) 100%);
-    color: var(--color-primary);
+    background: linear-gradient(135deg, var(--color-wood-light) 0%, var(--color-amber) 100%);
+    color: var(--color-gold);
     border: none;
-    border-radius: 6px;
-    font-family: 'Cinzel', serif;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-decorative);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -204,7 +204,7 @@
 }
 
 .sheet-btn:hover:not(:disabled) {
-    background: linear-gradient(135deg, var(--color-brown-lightest) 0%, var(--color-brown-lighter) 100%);
+    background: linear-gradient(135deg, var(--color-amber) 0%, var(--color-bronze) 100%);
     transform: translateY(-1px);
 }
 
@@ -214,28 +214,28 @@
 }
 
 .sheet-btn.danger {
-    background: linear-gradient(135deg, var(--color-error-dark) 0%, var(--color-red-brown) 100%);
+    background: linear-gradient(135deg, #8b0000 0%, #a52a2a 100%);
 }
 
 .sheet-btn.danger:hover:not(:disabled) {
-    background: linear-gradient(135deg, var(--color-red-brown) 0%, var(--color-red-dark) 100%);
+    background: linear-gradient(135deg, #a52a2a 0%, #8b0000 100%);
 }
 
 .sheet-btn.warning {
-    background: linear-gradient(135deg, var(--color-warning-dark) 0%, var(--color-warning-light) 100%);
-    color: var(--color-bg-secondary);
+    background: linear-gradient(135deg, #ff8c00 0%, #ffa500 100%);
+    color: var(--color-wood-dark);
 }
 
 .sheet-btn.warning:hover:not(:disabled) {
-    background: linear-gradient(135deg, var(--color-warning-light) 0%, var(--color-warning-dark) 100%);
+    background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
 }
 
 .sheet-viewer {
     flex: 1;
     width: 800px;
     height: 600px;
-    background: var(--color-bg-primary);
-    border: 2px solid var(--color-secondary);
+    background: var(--color-wood-dark);
+    border: 2px solid var(--color-wood-light);
     border-radius: var(--border-radius-md);
     overflow: hidden;
     position: relative;
@@ -254,8 +254,8 @@
     left: 0;
     right: 0;
     height: 40px;
-    background: var(--color-bg-elevated);
-    border-bottom: 2px solid var(--color-secondary);
+    background: rgba(61, 39, 22, 0.8);
+    border-bottom: 2px solid var(--color-wood-light);
     display: flex;
     overflow-x: auto;
     z-index: 200;
@@ -263,13 +263,13 @@
 
 .sheet-tab {
     flex: 0 0 auto;
-    padding: 0.5rem 1rem;
+    padding: var(--spacing-sm) var(--spacing-md);
     background: rgba(61, 39, 22, 0.8);
-    color: var(--color-text-tertiary);
-    border-right: 1px solid var(--color-secondary);
+    color: var(--color-amber);
+    border-right: 1px solid var(--color-wood-light);
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Cinzel', serif;
+    transition: var(--transition-smooth);
+    font-family: var(--font-decorative);
     font-weight: 600;
     font-size: 0.9rem;
     display: flex;
@@ -281,14 +281,14 @@
 }
 
 .sheet-tab.active {
-    background: var(--color-secondary);
-    color: var(--color-primary);
+    background: var(--color-wood-light);
+    color: var(--color-gold);
 }
 
 /* FIXED: Text box styling with proper drag cursor */
 .sheet-tab:hover:not(.active) {
-    background: rgba(139, 69, 19, 0.6);
-    color: var(--color-primary);
+    background: rgba(107, 68, 35, 0.6);
+    color: var(--color-gold);
 /* FIXED: Improved text box styling without default border */
 }
 
@@ -307,7 +307,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: var(--color-brown-peru);
+    color: var(--color-amber);
     font-style: italic;
 }
 
@@ -327,10 +327,10 @@
     width: 100%;
     height: calc(100% - 40px); /* Adjust for tabs */
     pointer-events: auto;
-    border-radius: 4px;
+    border-radius: var(--border-radius-sm);
     min-width: 20px;
     min-height: 20px;
-    padding: 4px 6px;
+    padding: var(--spacing-xs) var(--spacing-sm);
     transition: all 0.2s ease;
 }
 
@@ -348,7 +348,7 @@
 .text-box {
 /* FIXED: Improved text config modal layout */
     position: absolute;
-    font-family: 'Cinzel', serif;
+    font-family: var(--font-decorative);
     cursor: move;
     pointer-events: all;
     min-width: 100px;
@@ -415,12 +415,12 @@
 .text-config-form textarea {
     width: 100%;
     min-height: 80px;
-    padding: 0.75rem;
-    background: var(--color-brown-medium);
+    padding: var(--spacing-sm);
+    background: var(--color-wood-dark);
     color: var(--color-gold);
-    border: 2px solid var(--color-brown-lighter);
-    border-radius: 6px;
-    font-family: 'Cinzel', serif;
+    border: 2px solid var(--color-amber);
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-decorative);
     font-size: 1rem;
     resize: vertical;
     transition: all 0.3s ease;
@@ -446,14 +446,14 @@
 .color-input-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--spacing-sm);
 }
 
 .color-input-group input[type="color"] {
     width: 100%;
     height: 40px;
-    border: 2px solid var(--color-brown-lighter);
-    border-radius: 6px;
+    border: 2px solid var(--color-amber);
+    border-radius: var(--border-radius-sm);
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -466,9 +466,9 @@
 .checkbox-label {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--spacing-sm);
     font-size: 0.9rem;
-    color: var(--color-brown-peru);
+    color: var(--color-amber);
     cursor: pointer;
     transition: color 0.3s ease;
 }
@@ -489,25 +489,25 @@
 .form-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
 }
 
 .form-grid .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--spacing-sm);
 }
 
 .form-grid input,
 .form-grid select {
     width: 100%;
-    padding: 0.5rem;
-    background: var(--color-brown-medium);
+    padding: var(--spacing-sm);
+    background: var(--color-wood-dark);
     color: var(--color-gold);
-    border: 2px solid var(--color-brown-lighter);
-    border-radius: 4px;
-    font-family: 'Cinzel', serif;
+    border: 2px solid var(--color-amber);
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-decorative);
     transition: all 0.3s ease;
 }
 
@@ -519,8 +519,8 @@
 .color-input-group input[type="color"] {
     width: 50px;
     height: 35px;
-    border: 2px solid var(--color-brown-lighter);
-    border-radius: 4px;
+    border: 2px solid var(--color-amber);
+    border-radius: var(--border-radius-sm);
     cursor: pointer;
     background: none;
 }
@@ -528,8 +528,8 @@
 }
 
 .delete-btn {
-    padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, var(--color-red-dark) 0%, var(--color-red-brown) 100%);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: linear-gradient(135deg, #8b0000 0%, #a52a2a 100%);
     color: var(--color-gold);
     cursor: pointer;
 }
@@ -538,24 +538,24 @@
     accent-color: var(--color-gold);
     cursor: pointer;
     border: none;
-    border-radius: 6px;
-    font-family: 'Cinzel', serif;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-decorative);
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    gap: 0.5rem;
-    background: linear-gradient(135deg, var(--color-red-brown) 0%, var(--color-red-dark) 100%);
+    transition: var(--transition-smooth);
+    gap: var(--spacing-sm);
+    background: linear-gradient(135deg, #a52a2a 0%, #8b0000 100%);
     transform: translateY(-1px);
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(139, 69, 19, 0.3);
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid rgba(107, 68, 35, 0.3);
 }
 
 .form-actions button {
-    padding: 0.75rem 1.5rem;
+    padding: var(--spacing-sm) var(--spacing-lg);
     border: none;
-    border-radius: 6px;
-    font-family: 'Cinzel', serif;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-decorative);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -564,45 +564,45 @@
 }
 
 .form-actions .save-btn {
-    background: linear-gradient(135deg, var(--color-success-light) 0%, var(--color-success-dark) 100%);
+    background: linear-gradient(135deg, #32cd32 0%, #228b22 100%);
     color: white;
 }
 
 .form-actions .save-btn:hover {
-    background: linear-gradient(135deg, var(--color-success-dark) 0%, var(--color-success-light) 100%);
+    background: linear-gradient(135deg, #228b22 0%, #32cd32 100%);
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(50, 205, 50, 0.3);
 }
 
 .form-actions .duplicate-btn {
-    background: linear-gradient(135deg, var(--color-info-light) 0%, var(--color-info-dark) 100%);
+    background: linear-gradient(135deg, #4169e1 0%, #1e90ff 100%);
     color: white;
 }
 
 .form-actions .duplicate-btn:hover {
-    background: linear-gradient(135deg, var(--color-info-dark) 0%, var(--color-info-light) 100%);
+    background: linear-gradient(135deg, #1e90ff 0%, #4169e1 100%);
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(65, 105, 225, 0.3);
 }
 
 .form-actions .delete-btn {
-    background: linear-gradient(135deg, var(--color-error-light) 0%, var(--color-red-dark) 100%);
+    background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
     color: white;
 }
 
 .form-actions .delete-btn:hover {
-    background: linear-gradient(135deg, var(--color-red-dark) 0%, var(--color-error-light) 100%);
+    background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(220, 20, 60, 0.3);
 }
 
 .form-actions .cancel-btn {
-    background: linear-gradient(135deg, var(--color-brown-lighter) 0%, var(--color-brown-lightest) 100%);
+    background: linear-gradient(135deg, var(--color-amber) 0%, var(--color-bronze) 100%);
     color: var(--color-gold);
 }
 
 .form-actions .cancel-btn:hover {
-    background: linear-gradient(135deg, var(--color-brown-lightest) 0%, var(--color-brown-peru) 100%);
+    background: linear-gradient(135deg, var(--color-bronze) 0%, var(--color-amber) 100%);
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
 }

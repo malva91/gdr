@@ -3,9 +3,9 @@
     flex: 1;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, var(--color-brown-darkest) 0%, var(--color-brown-darkest-alt) 100%);
-    border: 1px solid rgba(240, 230, 210, 0.12);
-    border-radius: 16px;
+    background: linear-gradient(135deg, #0d0a08 0%, #050403 100%);
+    border: 1px solid rgba(212, 175, 55, 0.12);
+    border-radius: var(--border-radius-xl);
     min-height: 0;
     box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.6), 0 4px 24px rgba(0, 0, 0, 0.3);
 }
@@ -59,14 +59,14 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: var(--color-text-tertiary);
+    color: var(--color-amber);
     font-style: italic;
 }
 
 .ping-hint {
     margin-top: var(--spacing-md);
     font-size: 0.9rem;
-    color: var(--color-secondary);
+    color: var(--color-wood-light);
     opacity: 0.8;
 }
 
@@ -82,18 +82,18 @@
 .token,
 .map-asset {
     position: absolute;
-    border-radius: 50%;
+    border-radius: var(--border-radius-round);
     background-size: cover;
     background-position: center;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-md), 0 0 0 2px rgba(255, 255, 255, 0.1);
+    transition: var(--transition-smooth);
     pointer-events: all;
     user-select: none;
 }
 
 /* FIXED: Remove shadow and border from PNG assets */
 .map-asset {
-    border-radius: 4px;
+    border-radius: var(--border-radius-sm);
     border: none !important;
     box-shadow: none !important;
 }
@@ -144,9 +144,9 @@
     left: 50%;
     transform: translateX(-50%);
     background: rgba(0, 0, 0, 0.8);
-    color: var(--color-primary);
-    padding: 1px 3px;
-    border-radius: 2px;
+    color: var(--color-gold);
+    padding: var(--spacing-xs) var(--spacing-xs);
+    border-radius: var(--border-radius-sm);
     font-size: 7px;
     white-space: nowrap;
     pointer-events: none;
@@ -166,7 +166,7 @@
     bottom: -10px;
     width: 20px;
     height: 20px;
-    background: var(--color-primary);
+    background: var(--color-gold);
     border: 2px solid white;
     border-radius: var(--border-radius-round);
     cursor: nw-resize;
@@ -174,13 +174,13 @@
     align-items: center;
     justify-content: center;
     font-size: 10px;
-    color: var(--color-bg-secondary);
+    color: var(--color-wood-dark);
     font-weight: bold;
     z-index: 101;
 }
 
 .scale-handle:hover {
-    background: var(--color-primary-light);
+    background: var(--color-bronze);
     transform: scale(1.1);
 }
 
@@ -237,15 +237,15 @@
     bottom: -42px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 7px 16px;
-    border-radius: 14px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-lg);
     font-size: 13px;
     font-weight: 700;
     white-space: nowrap;
     pointer-events: none;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.95), 0 0 12px currentColor;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 1px rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(8px);
+    backdrop-filter: var(--backdrop-blur-sm);
 }
 
 @keyframes pingRipple {
