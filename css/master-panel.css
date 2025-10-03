@@ -57,16 +57,14 @@
     padding: var(--spacing-md);
     overflow-y: auto;
     overflow-x: hidden;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto minmax(200px, 1fr) minmax(200px, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: var(--spacing-md);
     min-height: 0;
 }
 
 /* Quick Actions */
 .quick-actions {
-    grid-column: 1 / -1;
     display: flex;
     gap: var(--spacing-md);
     justify-content: center;
@@ -107,14 +105,17 @@
     background: linear-gradient(135deg, var(--color-error) 0%, var(--color-error-dark) 100%);
 }
 
+/* Asset Libraries */
+.asset-libraries {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    grid-auto-rows: auto;
+}
+
 /* Asset Libraries - Music Row */
 .asset-library.music-library {
     grid-column: 1 / -1;
-}
-
-/* Asset Libraries */
-.asset-libraries {
-    display: contents;
 }
 
 .asset-library {
@@ -124,7 +125,12 @@
     border: 2px solid var(--color-brown-copper);
     border-radius: var(--border-radius-md);
     overflow: hidden;
-    min-height: 50px;
+    min-height: auto;
+    max-height: fit-content;
+}
+
+.asset-library.collapsed {
+    max-height: 60px;
 }
 
 .library-header {
@@ -180,18 +186,18 @@
 }
 
 .library-content {
-    flex: 1;
     padding: var(--spacing-md);
     overflow-y: auto;
     overflow-x: hidden;
-    min-height: 0;
     max-height: 300px;
     display: block;
-    transition: all var(--transition-normal);
+    transition: max-height var(--transition-normal), padding var(--transition-normal);
 }
 
 .asset-library.collapsed .library-content {
-    display: none;
+    max-height: 0;
+    padding: 0 var(--spacing-md);
+    overflow: hidden;
 }
 
 .no-assets {
