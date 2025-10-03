@@ -116,8 +116,19 @@ if (!move_uploaded_file($file['tmp_name'], $filepath)) {
 // Generate URL for the file (correct path without php folder)
 $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
 $host = $_SERVER['HTTP_HOST'];
-$scriptDir = dirname($_SERVER['REQUEST_URI']);
-$baseUrl = $protocol . '://' . $host . dirname($scriptDir); // Go up one level from php folder
+
+// FIXED: Get the document root path more reliably
+// Calculate base path by removing /php from the script path
+$scriptPath = dirname($_SERVER['SCRIPT_NAME']); // Gets /php
+$basePath = dirname($scriptPath); // Goes up one level to /
+
+// Clean up path (remove trailing slashes, handle root case)
+$basePath = rtrim($basePath, '/');
+if ($basePath === '') {
+    $basePath = '';
+}
+
+$baseUrl = $protocol . '://' . $host . $basePath;
 $fileUrl = $baseUrl . "/uploads/$type/$room/" . $filename;
 
 // Return success response

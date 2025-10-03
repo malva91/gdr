@@ -128,7 +128,16 @@ export class MapSystem {
                 this.isMapChanging = true;
                 this.currentMap = mapData;
                 this.autoCenter = true;
-                
+
+                // Validate URL before loading
+                if (!mapData.url || mapData.url.trim() === '') {
+                    console.error('❌ URL mappa non valido o vuoto');
+                    mapImage.style.display = 'none';
+                    noMapDiv.style.display = 'block';
+                    this.isMapChanging = false;
+                    return;
+                }
+
                 // Preload image for faster display
                 const img = new Image();
                 img.onload = () => {
@@ -153,8 +162,11 @@ export class MapSystem {
                     }, 100);
                 };
 
-                img.onerror = () => {
+                img.onerror = (error) => {
                     console.error('❌ Errore caricamento immagine mappa');
+                    console.error('URL mappa:', mapData.url);
+                    console.error('Dettagli errore:', error);
+                    console.warn('⚠️ Verifica che il file esista e sia accessibile');
                     mapImage.style.display = 'none';
                     noMapDiv.style.display = 'block';
                     this.isMapChanging = false;
