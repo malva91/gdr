@@ -242,8 +242,8 @@
 .result-avatar {
     width: 25px;
     height: 25px;
-    border-radius: 50%;
-    background: #8b4513;
+    border-radius: var(--border-radius-round);
+    background: var(--color-secondary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -254,7 +254,7 @@
 
 .result-user {
     font-weight: 600;
-    color: #d4af37;
+    color: var(--color-primary);
     max-width: 120px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -263,7 +263,7 @@
 
 .result-time {
     font-size: 0.8rem;
-    color: #cd853f;
+    color: var(--color-text-tertiary);
     margin-left: auto;
 }
 
@@ -292,20 +292,20 @@
 }
 
 .die-value.critical-success {
-    background: #228b22;
-    color: #fff;
+    background: var(--color-success-dark);
+    color: white;
     box-shadow: 0 0 8px rgba(34, 139, 34, 0.6);
 }
 
 .die-value.critical-failure {
-    background: #8b0000;
-    color: #fff;
+    background: var(--color-error-dark);
+    color: white;
     box-shadow: 0 0 8px rgba(139, 0, 0, 0.6);
 }
 
 .result-total {
     font-weight: 700;
-    color: #d4af37;
+    color: var(--color-primary);
     font-size: 1.1rem;
     text-align: center;
     padding: 0.5rem;

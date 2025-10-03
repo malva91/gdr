@@ -26,9 +26,17 @@
     --color-border-strong: rgba(248, 249, 250, 0.2);
 
     --color-success: #10b981;
+    --color-success-light: #32cd32;
+    --color-success-dark: #228b22;
     --color-warning: #f59e0b;
+    --color-warning-light: #ffa500;
+    --color-warning-dark: #ff8c00;
     --color-error: #ef4444;
+    --color-error-light: #dc143c;
+    --color-error-dark: #8b0000;
     --color-info: #3b82f6;
+    --color-info-light: #4169e1;
+    --color-info-dark: #1e90ff;
 
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-decorative: 'Playfair Display', 'Cinzel', serif;
