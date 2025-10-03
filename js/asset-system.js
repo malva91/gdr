@@ -39,6 +39,11 @@ export class AssetSystem {
         this.scaleStartValue = 1;
         this.scaleStartY = 0;
         this.scaleStartX = 0;
+
+        // Firebase batch updates
+        this.batchUpdateDelay = 100;
+        this.pendingUpdates = new Map();
+        this.batchTimer = null;
     }
     
     // Initialize asset system
@@ -437,16 +442,57 @@ export class AssetSystem {
         }
     }
     
+    // Queue position update for batching
+    queuePositionUpdate(assetId, x, y) {
+        this.pendingUpdates.set(assetId, { x, y });
+
+        if (this.batchTimer) {
+            clearTimeout(this.batchTimer);
+        }
+
+        this.batchTimer = setTimeout(() => {
+            this.flushPendingUpdates();
+        }, this.batchUpdateDelay);
+    }
+
+    // Flush all pending updates to Firebase
+    async flushPendingUpdates() {
+        if (this.pendingUpdates.size === 0) return;
+
+        const room = this.authManager.getCurrentRoom();
+        const user = this.authManager.getCurrentUser();
+
+        if (!room || !user) return;
+
+        const updates = {};
+        const timestamp = FirebaseHelper.getTimestamp();
+
+        for (const [assetId, position] of this.pendingUpdates) {
+            updates[`rooms/${room}/assets/${assetId}/x`] = position.x;
+            updates[`rooms/${room}/assets/${assetId}/y`] = position.y;
+            updates[`rooms/${room}/assets/${assetId}/lastMoved`] = timestamp;
+            updates[`rooms/${room}/assets/${assetId}/movedBy`] = user.name;
+        }
+
+        this.pendingUpdates.clear();
+
+        try {
+            await FirebaseHelper.database.ref().update(updates);
+        } catch (error) {
+            console.error('❌ Errore batch update posizioni asset:', error);
+        }
+    }
+
     // Save asset position to Firebase
     async saveAssetPosition(finalX, finalY) {
         const room = this.authManager.getCurrentRoom();
         const user = this.authManager.getCurrentUser();
-        
+
         if (!room || !user) {
             console.error('❌ Room o user non disponibili per salvataggio posizione');
             return;
         }
-        
+
         try {
             await FirebaseHelper.updateData(`rooms/${room}/assets/${this.selectedAsset.id}`, {
                 x: finalX,
@@ -454,9 +500,9 @@ export class AssetSystem {
                 lastMoved: FirebaseHelper.getTimestamp(),
                 movedBy: user.name
             });
-            
+
             console.log('✅ Posizione asset salvata (libera):', this.selectedAsset.id, { x: finalX, y: finalY });
-            
+
         } catch (error) {
             console.error('❌ Errore salvataggio posizione asset:', error);
             throw error;

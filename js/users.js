@@ -10,6 +10,8 @@ export class UserManager {
         this.heartbeatFrequency = 30000; // 30 seconds
         this.isCleaningUp = false;
         this.lastUserUpdate = 0;
+        this.throttleDelay = 500;
+        this.pendingUpdate = null;
     }
     
     // Initialize user management
@@ -168,8 +170,26 @@ export class UserManager {
         }
     }
     
-    // Handle users update
+    // Handle users update with throttling
     handleUsersUpdate(snapshot) {
+        const now = Date.now();
+
+        if (now - this.lastUserUpdate < this.throttleDelay) {
+            if (this.pendingUpdate) {
+                clearTimeout(this.pendingUpdate);
+            }
+            this.pendingUpdate = setTimeout(() => {
+                this.processUsersUpdate(snapshot);
+            }, this.throttleDelay);
+            return;
+        }
+
+        this.lastUserUpdate = now;
+        this.processUsersUpdate(snapshot);
+    }
+
+    // Process users update
+    processUsersUpdate(snapshot) {
         try {
             const usersData = snapshot.val();
             const previousUserCount = this.users.size;

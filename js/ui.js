@@ -12,6 +12,7 @@ import PingSystem from './ping-system.js?v.100';
 import SoundBoardSystem from './sound-board-system.js?v.100';
 import CharacterSheetSystem from './character-sheet-system.js?v.100';
 import { modalSystem } from './modal-system.js?v.100';
+import FirebaseHelper from './firebase.js?v.100';
 
 export class UIManager {
     constructor() {
@@ -37,6 +38,7 @@ export class UIManager {
     init() {
         console.log('🎮 Inizializzazione UI Manager...');
         this.setupEventListeners();
+        this.setupConnectionMonitor();
         this.authManager.init();
         
         // FIXED: Applica il nome stanza configurato
@@ -183,6 +185,41 @@ export class UIManager {
         }
     }
     
+    // Setup connection monitor
+    setupConnectionMonitor() {
+        FirebaseHelper.monitorConnection((status) => {
+            this.updateConnectionStatus(status);
+        });
+    }
+
+    // Update connection status indicator
+    updateConnectionStatus(status) {
+        const connectionStatus = document.getElementById('connectionStatus');
+        if (!connectionStatus) return;
+
+        const currentStatus = status || FirebaseHelper.getConnectionStatus();
+
+        connectionStatus.className = 'connection-status';
+        connectionStatus.classList.add(currentStatus);
+
+        let statusText = '';
+        switch (currentStatus) {
+            case 'connected':
+                statusText = 'Connesso';
+                break;
+            case 'disconnected':
+                statusText = 'Disconnesso';
+                break;
+            case 'reconnecting':
+                statusText = 'Riconnessione...';
+                break;
+            default:
+                statusText = 'Sconosciuto';
+        }
+
+        connectionStatus.title = `Stato connessione: ${statusText}`;
+    }
+
     // Update responsive layout
     updateResponsiveLayout() {
         const gameInterface = document.getElementById('gameInterface');
@@ -202,6 +239,7 @@ export class UIManager {
         this.currentView = 'game';
         this.authManager.showGameInterface();
         this.updateRoomDisplay();
+        this.updateConnectionStatus();
         
         // Initialize all systems with proper sequencing - only once and prevent multiple calls
         if (!this.systemsInitialized && !this.initializationInProgress) {

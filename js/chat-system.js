@@ -5,7 +5,11 @@ export class ChatSystem {
     constructor(authManager) {
         this.authManager = authManager;
         this.messagesListener = null;
-        this.maxMessages = 100;
+        this.maxMessages = 50;
+        this.visibleMessages = 50;
+        this.throttleDelay = 500;
+        this.lastUpdate = 0;
+        this.pendingUpdate = null;
     }
     
     // Initialize chat system
@@ -116,8 +120,26 @@ export class ChatSystem {
         });
     }
     
-    // Handle messages update
+    // Handle messages update with throttling
     handleMessagesUpdate(snapshot) {
+        const now = Date.now();
+
+        if (now - this.lastUpdate < this.throttleDelay) {
+            if (this.pendingUpdate) {
+                clearTimeout(this.pendingUpdate);
+            }
+            this.pendingUpdate = setTimeout(() => {
+                this.processMessagesUpdate(snapshot);
+            }, this.throttleDelay);
+            return;
+        }
+
+        this.lastUpdate = now;
+        this.processMessagesUpdate(snapshot);
+    }
+
+    // Process messages update
+    processMessagesUpdate(snapshot) {
         try {
             const messagesData = snapshot.val();
             const messagesContainer = document.getElementById('chatMessages');
@@ -139,8 +161,8 @@ export class ChatSystem {
                 return timeB - timeA;
             });
             
-            // Keep only recent messages
-            const recentMessages = messages.slice(0, this.maxMessages);
+            // Keep only visible messages for rendering
+            const recentMessages = messages.slice(0, this.visibleMessages);
             
             // Check if we need to scroll to bottom (if user was already at bottom)
             const shouldScrollToBottom = this.isScrolledToBottom(messagesContainer);

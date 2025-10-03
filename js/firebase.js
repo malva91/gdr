@@ -17,6 +17,8 @@ const database = firebase.database();
 // Firebase helper functions
 export const FirebaseHelper = {
     database,
+    connectionStatus: 'unknown',
+    connectionListeners: [],
     
     // Get reference to a specific path
     getRef(path) {
@@ -109,6 +111,33 @@ export const FirebaseHelper = {
     // Get current timestamp
     getTimestamp() {
         return firebase.database.ServerValue.TIMESTAMP;
+    },
+
+    // Monitor connection status
+    monitorConnection(callback) {
+        const connectedRef = database.ref('.info/connected');
+        connectedRef.on('value', (snapshot) => {
+            const isConnected = snapshot.val();
+            this.connectionStatus = isConnected ? 'connected' : 'disconnected';
+            callback(this.connectionStatus);
+            this.notifyConnectionListeners(this.connectionStatus);
+        });
+        return connectedRef;
+    },
+
+    // Add connection listener
+    addConnectionListener(callback) {
+        this.connectionListeners.push(callback);
+    },
+
+    // Notify connection listeners
+    notifyConnectionListeners(status) {
+        this.connectionListeners.forEach(callback => callback(status));
+    },
+
+    // Get connection status
+    getConnectionStatus() {
+        return this.connectionStatus;
     }
 };
 

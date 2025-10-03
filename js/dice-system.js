@@ -11,6 +11,9 @@ export class DiceSystem {
             '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57',
             '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3', '#ff9f43'
         ];
+        this.throttleDelay = 500;
+        this.lastUpdate = 0;
+        this.pendingUpdate = null;
     }
     
     // Initialize dice system
@@ -229,8 +232,26 @@ export class DiceSystem {
         });
     }
     
-    // Handle results update
+    // Handle results update with throttling
     handleResultsUpdate(snapshot) {
+        const now = Date.now();
+
+        if (now - this.lastUpdate < this.throttleDelay) {
+            if (this.pendingUpdate) {
+                clearTimeout(this.pendingUpdate);
+            }
+            this.pendingUpdate = setTimeout(() => {
+                this.processResultsUpdate(snapshot);
+            }, this.throttleDelay);
+            return;
+        }
+
+        this.lastUpdate = now;
+        this.processResultsUpdate(snapshot);
+    }
+
+    // Process results update
+    processResultsUpdate(snapshot) {
         try {
             const resultsData = snapshot.val();
             const resultsList = document.getElementById('diceResults');
@@ -252,8 +273,8 @@ export class DiceSystem {
                 return timeB - timeA;
             });
             
-            // Keep only last 20 results
-            const recentResults = results.slice(0, 20);
+            // Keep only last 50 results for rendering
+            const recentResults = results.slice(0, 50);
             
             resultsList.innerHTML = '';
             recentResults.forEach(result => {

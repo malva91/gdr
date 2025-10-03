@@ -38,6 +38,11 @@ export class TokenSystem {
         this.smoothingFactor = 0.8;
         this.targetPosition = { x: 0, y: 0 };
         this.currentPosition = { x: 0, y: 0 };
+
+        // Firebase batch updates
+        this.batchUpdateDelay = 100;
+        this.pendingUpdates = new Map();
+        this.batchTimer = null;
     }
     
     // Initialize token system
@@ -326,16 +331,57 @@ export class TokenSystem {
         }
     }
     
+    // Queue position update for batching
+    queuePositionUpdate(tokenId, x, y) {
+        this.pendingUpdates.set(tokenId, { x, y });
+
+        if (this.batchTimer) {
+            clearTimeout(this.batchTimer);
+        }
+
+        this.batchTimer = setTimeout(() => {
+            this.flushPendingUpdates();
+        }, this.batchUpdateDelay);
+    }
+
+    // Flush all pending updates to Firebase
+    async flushPendingUpdates() {
+        if (this.pendingUpdates.size === 0) return;
+
+        const room = this.authManager.getCurrentRoom();
+        const user = this.authManager.getCurrentUser();
+
+        if (!room || !user) return;
+
+        const updates = {};
+        const timestamp = FirebaseHelper.getTimestamp();
+
+        for (const [tokenId, position] of this.pendingUpdates) {
+            updates[`rooms/${room}/tokens/${tokenId}/x`] = position.x;
+            updates[`rooms/${room}/tokens/${tokenId}/y`] = position.y;
+            updates[`rooms/${room}/tokens/${tokenId}/lastMoved`] = timestamp;
+            updates[`rooms/${room}/tokens/${tokenId}/movedBy`] = user.name;
+        }
+
+        this.pendingUpdates.clear();
+
+        try {
+            await FirebaseHelper.database.ref().update(updates);
+        } catch (error) {
+            console.error('❌ Errore batch update posizioni token:', error);
+        }
+    }
+
     // Save token position to Firebase
     async saveTokenPosition(finalX, finalY) {
         const room = this.authManager.getCurrentRoom();
         const user = this.authManager.getCurrentUser();
-        
+
         if (!room || !user) {
             console.error('❌ Room o user non disponibili per salvataggio posizione');
             return;
         }
-        
+
         try {
             await FirebaseHelper.updateData(`rooms/${room}/tokens/${this.selectedToken.id}`, {
                 x: finalX,
@@ -343,7 +389,7 @@ export class TokenSystem {
                 lastMoved: FirebaseHelper.getTimestamp(),
                 movedBy: user.name
             });
-            
+
         } catch (error) {
             console.error('❌ Errore salvataggio posizione token:', error);
             throw error;
