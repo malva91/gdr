@@ -56,9 +56,10 @@
     flex: 1;
     padding: var(--spacing-md);
     overflow-y: auto;
+    overflow-x: hidden;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto 1fr 1fr;
+    grid-template-rows: auto auto minmax(200px, 1fr) minmax(200px, 1fr);
     gap: var(--spacing-md);
     min-height: 0;
 }
@@ -182,7 +183,9 @@
     flex: 1;
     padding: var(--spacing-md);
     overflow-y: auto;
+    overflow-x: hidden;
     min-height: 0;
+    max-height: 300px;
     display: block;
     transition: all var(--transition-normal);
 }
