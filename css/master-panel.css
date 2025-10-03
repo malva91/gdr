@@ -62,6 +62,8 @@
     gap: var(--spacing-md);
     min-height: 0;
     height: 0;
+    position: relative;
+    background: transparent;
 }
 
 /* Quick Actions */
@@ -71,6 +73,8 @@
     justify-content: center;
     padding: var(--spacing-sm);
     flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
 }
 
 .quick-action-btn {
@@ -112,6 +116,8 @@
     grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-md);
     grid-auto-rows: auto;
+    position: relative;
+    z-index: 1;
 }
 
 /* Asset Libraries - Music Row */
