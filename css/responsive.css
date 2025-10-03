@@ -185,7 +185,34 @@
     }
 
     .asset-actions {
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+
+    .library-asset {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .asset-preview {
+        align-self: center;
+    }
+
+    .asset-info {
+        width: 100%;
+    }
+
+    .token-config-row,
+    .token-control-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .token-name-input,
+    .token-size-select,
+    .name-toggle-btn,
+    .asset-action-btn {
+        width: 100%;
     }
 }
