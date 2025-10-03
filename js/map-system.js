@@ -137,6 +137,9 @@ export class MapSystem {
                     mapImage.style.display = 'block';
                     noMapDiv.style.display = 'none';
 
+                    // FIXED: Sincronizza dimensioni dei layer con immagine mappa
+                    this.syncLayerDimensions();
+
                     // Wait for image to be rendered, then calculate and apply transforms
                     setTimeout(() => {
                         try {
@@ -249,7 +252,41 @@ export class MapSystem {
         // Apply the transform
         this.updateMapTransform();
     }
-    
+
+    // FIXED: Sincronizza dimensioni layer con immagine mappa
+    syncLayerDimensions() {
+        const mapImage = document.getElementById('mapImage');
+        const tokensLayer = document.getElementById('tokensLayer');
+        const assetsLayer = document.getElementById('assetsLayer');
+        const mapCanvas = document.getElementById('mapCanvas');
+
+        if (!mapImage || !tokensLayer || !assetsLayer || !mapCanvas) {
+            console.error('❌ Elementi per sincronizzazione layer non trovati');
+            return;
+        }
+
+        // Wait for image to be fully loaded
+        if (mapImage.naturalWidth === 0 || mapImage.naturalHeight === 0) {
+            setTimeout(() => this.syncLayerDimensions(), 50);
+            return;
+        }
+
+        const naturalWidth = mapImage.naturalWidth;
+        const naturalHeight = mapImage.naturalHeight;
+
+        // Set canvas dimensions to match image natural size
+        mapCanvas.style.width = `${naturalWidth}px`;
+        mapCanvas.style.height = `${naturalHeight}px`;
+
+        // Set layer dimensions to match image natural size
+        tokensLayer.style.width = `${naturalWidth}px`;
+        tokensLayer.style.height = `${naturalHeight}px`;
+        assetsLayer.style.width = `${naturalWidth}px`;
+        assetsLayer.style.height = `${naturalHeight}px`;
+
+        console.log('✅ Layer sincronizzati con mappa:', naturalWidth, 'x', naturalHeight);
+    }
+
     // Zoom in (local only)
     zoomIn() {
         this.autoCenter = false;

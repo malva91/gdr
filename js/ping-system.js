@@ -181,7 +181,9 @@ export class PingSystem {
         pingElement.className = 'map-ping';
         pingElement.dataset.pingId = pingId;
 
-        // Position using map coordinates (will scale with map)
+        // FIXED: Le coordinate sono in pixel dell'immagine della mappa
+        // Posizioniamo il ping usando le stesse coordinate dell'immagine
+        // Il tokensLayer si scala automaticamente con la mappa
         pingElement.style.cssText = `
             position: absolute;
             left: ${pingData.x}px;
