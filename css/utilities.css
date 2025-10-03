@@ -5,15 +5,15 @@
 
 /* Status indicators */
 .user-item.online {
-    border-left: 3px solid #32cd32;
+    border-left: 3px solid var(--color-success-light);
 }
 
 .user-item.away {
-    border-left: 3px solid #ffa500;
+    border-left: 3px solid var(--color-warning-light);
 }
 
 .user-item.offline {
-    border-left: 3px solid #cd853f;
+    border-left: 3px solid var(--color-brown-peru);
     opacity: 0.7;
 }
 
@@ -24,7 +24,7 @@
     gap: 0.5rem;
     padding: 0.5rem 1rem;
     background: rgba(44, 24, 16, 0.8);
-    border: 1px solid #8b4513;
+    border: 1px solid var(--color-brown-lighter);
     border-radius: 8px;
     font-size: 0.85rem;
     margin-right: 0.5rem;
@@ -34,24 +34,24 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #cd853f;
+    background: var(--color-brown-peru);
     transition: all 0.3s ease;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
 .connection-status.connected .status-indicator {
-    background: #32cd32;
+    background: var(--color-success-light);
     box-shadow: 0 0 12px rgba(50, 205, 50, 0.6);
     animation: pulse-glow 2s ease-in-out infinite;
 }
 
 .connection-status.disconnected .status-indicator {
-    background: #dc143c;
+    background: var(--color-error-light);
     box-shadow: 0 0 12px rgba(220, 20, 60, 0.6);
 }
 
 .connection-status.reconnecting .status-indicator {
-    background: #ffa500;
+    background: var(--color-warning-light);
     box-shadow: 0 0 12px rgba(255, 165, 0, 0.6);
     animation: pulse-warning 1s ease-in-out infinite;
 }

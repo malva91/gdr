@@ -16,7 +16,7 @@
 }
 
 .music-header h4 {
-    color: #d4af37;
+    color: var(--color-gold);
     font-family: 'Uncial Antiqua', serif;
     font-size: 1rem;
 }
@@ -28,8 +28,8 @@
 }
 
 .music-btn {
-    background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
-    color: #d4af37;
+    background: linear-gradient(135deg, var(--color-brown-lighter) 0%, var(--color-brown-lightest) 100%);
+    color: var(--color-gold);
     border: none;
     border-radius: 6px;
     padding: 0.5rem;
@@ -40,7 +40,7 @@
 }
 
 .music-btn:hover {
-    background: linear-gradient(135deg, #a0522d 0%, #cd7f32 100%);
+    background: linear-gradient(135deg, var(--color-brown-lightest) 0%, var(--color-brown-copper) 100%);
     transform: scale(1.05) translateY(-1px);
     box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
 }
@@ -66,14 +66,14 @@
 
 .volume-label {
     font-size: 0.8rem;
-    color: #d4af37;
+    color: var(--color-gold);
     min-width: 20px;
 }
 
 .volume-slider {
     width: 80px;
     height: 4px;
-    background: #8b4513;
+    background: var(--color-brown-lighter);
     outline: none;
     border-radius: 2px;
 }
@@ -82,14 +82,14 @@
     appearance: none;
     width: 16px;
     height: 16px;
-    background: #d4af37;
+    background: var(--color-gold);
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .volume-slider::-webkit-slider-thumb:hover {
-    background: #f4bf47;
+    background: var(--color-gold-light);
     transform: scale(1.3);
     box-shadow: 0 0 8px rgba(244, 191, 71, 0.6);
 }
@@ -97,7 +97,7 @@
 .volume-slider::-moz-range-thumb {
     width: 16px;
     height: 16px;
-    background: #d4af37;
+    background: var(--color-gold);
     border-radius: 50%;
     cursor: pointer;
     border: none;
@@ -105,7 +105,7 @@
 }
 
 .volume-slider::-moz-range-thumb:hover {
-    background: #f4bf47;
+    background: var(--color-gold-light);
     transform: scale(1.3);
     box-shadow: 0 0 8px rgba(244, 191, 71, 0.6);
 }
@@ -122,7 +122,7 @@
 }
 
 .track-name {
-    color: #d4af37;
+    color: var(--color-gold);
     font-weight: 600;
     font-size: 0.9rem;
     max-width: 200px;
@@ -132,7 +132,7 @@
 }
 
 .track-time {
-    color: #cd853f;
+    color: var(--color-brown-peru);
     font-size: 0.8rem;
 }
 

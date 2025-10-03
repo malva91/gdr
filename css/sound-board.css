@@ -16,7 +16,7 @@
 }
 
 .sound-board-header h4 {
-    color: #d4af37;
+    color: var(--color-gold);
     font-family: 'Uncial Antiqua', serif;
     font-size: 0.9rem;
     text-align: center;
@@ -43,7 +43,7 @@
 .sound-button {
     border: 2px solid rgba(139, 69, 19, 0.7);
     border-radius: 7px;
-    color: #fff;
+    color: var(--color-white);
     font-family: 'Cinzel', serif;
     font-weight: 600;
     cursor: pointer;
@@ -70,8 +70,8 @@
     width: 30px;
     height: 20px;
     font-size: 0.7rem;
-    background: linear-gradient(135deg, #8b0000 0%, #a52a2a 100%);
-    border: 1px solid #8b4513;
+    background: linear-gradient(135deg, var(--color-red-dark) 0%, var(--color-red-brown) 100%);
+    border: 1px solid var(--color-brown-lighter);
     border-radius: 4px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }

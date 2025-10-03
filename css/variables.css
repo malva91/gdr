@@ -38,6 +38,29 @@
     --color-info-light: #4169e1;
     --color-info-dark: #1e90ff;
 
+    --color-brown-darkest: #0d0a08;
+    --color-brown-darkest-alt: #050403;
+    --color-brown-dark: #1a0f08;
+    --color-brown-medium: #2c1810;
+    --color-brown-light: #3d2716;
+    --color-brown-lighter: #8b4513;
+    --color-brown-lightest: #a0522d;
+    --color-brown-copper: #cd7f32;
+    --color-brown-peru: #cd853f;
+
+    --color-gold: #d4af37;
+    --color-gold-light: #f4bf47;
+    --color-gold-bright: #ffd700;
+
+    --color-red-dark: #8b0000;
+    --color-red-brown: #a52a2a;
+    --color-red-bright: #ff0000;
+
+    --color-gray-dark: #222;
+    --color-gray-medium: #555;
+    --color-gray-light: #f5f5f5;
+    --color-white: #fff;
+
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-decorative: 'Playfair Display', 'Cinzel', serif;
 

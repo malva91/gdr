@@ -51,7 +51,7 @@
 }
 
 .remove-group:hover {
-    background: #dc2626;
+    background: var(--color-error);
     transform: scale(1.05);
 }
 
@@ -177,7 +177,7 @@
 }
 
 .add-group-btn:hover {
-    background: #059669;
+    background: var(--color-success);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }

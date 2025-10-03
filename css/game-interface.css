@@ -167,7 +167,7 @@
 }
 
 .exit-btn:hover {
-    background: #dc2626;
+    background: var(--color-error);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
