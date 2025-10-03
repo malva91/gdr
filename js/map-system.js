@@ -364,45 +364,45 @@ export class MapSystem {
     // Get map bounds for token positioning
     getMapBounds() {
         const mapImage = document.getElementById('mapImage');
-        const mapContainer = document.getElementById('mapContainer');
-        
-        if (!mapImage || !mapContainer || !this.currentMap) return null;
-        
-        const containerRect = mapContainer.getBoundingClientRect();
-        
+        const mapViewport = document.getElementById('mapViewport');
+
+        if (!mapImage || !mapViewport || !this.currentMap) return null;
+
+        const viewportRect = mapViewport.getBoundingClientRect();
+
         return {
-            left: containerRect.left + this.localPanX,
-            top: containerRect.top + this.localPanY,
+            left: viewportRect.left + this.localPanX,
+            top: viewportRect.top + this.localPanY,
             width: mapImage.naturalWidth * this.localZoom,
             height: mapImage.naturalHeight * this.localZoom,
             zoom: this.localZoom,
             panX: this.localPanX,
             panY: this.localPanY,
-            containerLeft: containerRect.left,
-            containerTop: containerRect.top
+            viewportLeft: viewportRect.left,
+            viewportTop: viewportRect.top
         };
     }
     
-    // Convert screen coordinates to map coordinates
+    // Convert screen coordinates to map coordinates (image pixels)
     screenToMapCoords(screenX, screenY) {
         const mapBounds = this.getMapBounds();
         if (!mapBounds) return { x: 0, y: 0 };
-        
-        // Convert screen coordinates to map-relative coordinates
-        const mapX = (screenX - mapBounds.containerLeft - this.localPanX) / this.localZoom;
-        const mapY = (screenY - mapBounds.containerTop - this.localPanY) / this.localZoom;
-        
+
+        // Convert screen coordinates to map image pixel coordinates
+        const mapX = (screenX - mapBounds.viewportLeft - this.localPanX) / this.localZoom;
+        const mapY = (screenY - mapBounds.viewportTop - this.localPanY) / this.localZoom;
+
         return { x: mapX, y: mapY };
     }
     
-    // Convert map coordinates to screen coordinates
+    // Convert map coordinates (image pixels) to screen coordinates
     mapToScreenCoords(mapX, mapY) {
         const mapBounds = this.getMapBounds();
         if (!mapBounds) return { x: 0, y: 0 };
-        
-        const screenX = mapX * this.localZoom + this.localPanX + mapBounds.containerLeft;
-        const screenY = mapY * this.localZoom + this.localPanY + mapBounds.containerTop;
-        
+
+        const screenX = mapX * this.localZoom + this.localPanX + mapBounds.viewportLeft;
+        const screenY = mapY * this.localZoom + this.localPanY + mapBounds.viewportTop;
+
         return { x: screenX, y: screenY };
     }
     

@@ -191,9 +191,10 @@ export class PingSystem {
             pointer-events: none;
             z-index: 1000;
             transform: translate(-50%, -50%);
+            animation: pingAppear 0.3s ease-out;
         `;
 
-        console.log('📍 Posizionamento ping:', pingId, 'alle coordinate:', pingData.x, pingData.y);
+        console.log('📍 Posizionamento ping:', pingId, 'coordinate immagine (px):', Math.round(pingData.x), Math.round(pingData.y));
         
         // Create ripple effect
         const ripple1 = document.createElement('div');
