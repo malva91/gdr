@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taverna dei Cani di Odino</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Uncial+Antiqua&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v.100" id="main-stylesheet">
+    <!-- Enhanced cache control meta tags -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="version" content="v.100">
+    <meta name="build" content="">
+</head>
+
+<body>
+
+    <div id="siteLockScreen" class="site-lock">
+  <div class="lock-container">
+    <h2 class="lock-title">Accesso riservato</h2>
+
+    <input type="password"
+           id="sitePassword"
+           class="lock-input"
+           placeholder="Inserisci la password" />
+
+    <button id="siteUnlockBtn" class="lock-btn">Entra</button>
+
+    <p id="siteLockError" class="lock-error" hidden>Password errata</p>
+  </div>
+</div>
+
+    <!-- Version Display - Bottom left -->
+    <div id="versionDisplay" class="version-display">
+        <span id="versionText">Loading...</span>
+        <button id="reloadBtn" class="reload-btn" title="Ricarica applicazione">🔄</button>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <img src="./logo/logo senza sfondo.png" class="img-logo">
+            <div class="tavern-logo">
+                <h1>🐺 Taverna dei Cani di Odino 🐺</h1>
+                <p>Benvenuto, valoroso guerriero</p>
+            </div>
+
+            <div class="login-form">
+                <div class="role-switch">
+                    <button id="playerTab" class="role-tab active">Giocatore</button>
+                    <button id="masterTab" class="role-tab">Master</button>
+                </div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="playerName">Nome</label>
+                        <input type="text" id="playerName" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="roomName">Nome Stanza</label>
+                        <input type="text" id="roomName" name="room" required readonly>
+                    </div>
+
+                    <div class="form-group" id="passwordGroup" style="display: none;">
+                        <label for="masterPassword">Password Master</label>
+                        <input type="password" id="masterPassword" name="password"
+                            placeholder="Inserisci password admin">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="avatarUpload">Avatar (opzionale)</label>
+<input 
+  type="file" 
+  id="avatarUpload" 
+  class="file-input" 
+  accept="image/png,image/jpeg" 
+/>                        <div class="avatar-preview" id="avatarPreview"></div>
+                    </div>
+
+                    <button type="submit" class="enter-btn">Entra nella Taverna</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Game Interface -->
+    <div id="gameInterface" class="game-interface" style="display: none;">
+        <!-- Header -->
+        <header class="game-header">
+            <div class="room-info">
+                <h2 id="currentRoomName">Stanza</h2>
+                <div class="room-subtitle">Taverna dei Cani di Odino</div>
+            </div>
+
+            <div class="users-list" id="usersList">
+                <!-- Users will be populated dynamically -->
+            </div>
+
+            <div class="header-actions">
+                <button id="masterPanelBtn" class="header-btn admin-only" style="display: none;"
+                    title="Pannello Master">⚙️</button>
+                <button id="characterSheetBtn" class="header-btn" title="Scheda Personaggio">📋</button>
+                <button id="exitBtn" class="exit-btn">🚪 Esci</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="game-main">
+            <!-- Left Column - Dice Section -->
+            <section class="dice-section">
+                <div class="section-header">
+                    <h3>🎲 Sistema Dadi</h3>
+                </div>
+                <div class="section-content">
+                    <div class="dice-controls">
+                        <div class="dice-groups" id="diceGroups">
+                            <!-- Dice groups will be added dynamically -->
+                        </div>
+
+                        <div class="dice-actions">
+                            <button id="addDiceGroup" class="add-group-btn">✚🎲</button>
+                            <button id="rollAllDice" class="roll-btn" disabled>🎲</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Center Column - Map Section -->
+            <section class="map-section">
+                <div class="section-header">
+                    <h3>🗺️ Mappa</h3>
+                    <div class="map-controls">
+                        <button id="zoomInBtn" class="map-btn" title="Zoom In">🔍+</button>
+                        <button id="zoomOutBtn" class="map-btn" title="Zoom Out">🔍-</button>
+                        <button id="resetZoomBtn" class="map-btn" title="Reset Zoom">🎯</button>
+                    </div>
+                </div>
+
+                <!-- Sound Board -->
+                <div class="sound-board admin-only" id="soundBoard" style="display: none;">
+                    <div class="sound-board-header">
+                        <h4>🔊 Pulsanti Sonori</h4>
+                    </div>
+                    <div class="sound-buttons" id="soundButtons">
+                        <!-- Sound buttons will be generated dynamically -->
+                    </div>
+                </div>
+
+                <div class="section-content">
+                    <div class="map-container" id="mapContainer">
+                        <div class="map-viewport" id="mapViewport">
+                            <div class="map-canvas" id="mapCanvas">
+                                <div class="no-map">
+                                    <p>Nessuna mappa caricata</p>
+                                    <p class="admin-only" style="display: none;">Usa il pannello Master per caricare una
+                                        mappa</p>
+                                    <p class="ping-hint">💡 Doppio click per fare ping sulla mappa</p>
+                                </div>
+                                <img id="mapImage" class="map-image" style="display: none;">
+                                <div id="tokensLayer" class="tokens-layer"></div>
+                                <div id="assetsLayer" class="assets-layer"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Column - Chat & Music Section -->
+            <section class="chat-section">
+                <!-- Music Player -->
+                <div class="music-player">
+                    <div class="music-header">
+                        <h4>🎵</h4>
+                        <div class="music-controls">
+                            <button id="playPauseBtn" class="music-btn admin-only" disabled
+                                style="display: none;">▶️</button>
+                            <button id="stopBtn" class="music-btn admin-only" disabled
+                                style="display: none;">⏹️</button>
+                            <button id="loopBtn" class="music-btn admin-only" style="display: none;">🔁</button>
+                            <div class="dual-volume-controls">
+                                <div class="volume-control music-volume">
+                                    <span class="volume-label">🎵</span>
+                                    <input type="range" id="musicVolumeSlider" class="volume-slider" min="0" max="100"
+                                        value="20">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="current-track" id="currentTrack">
+                        <span class="track-name">Nessuna traccia selezionata</span>
+                        <span class="track-time">--:-- / --:--</span>
+                    </div>
+                </div>
+
+                <!-- Chat and Dice Results Container -->
+                <div class="chat-dice-container">
+                    <!-- Dice Results Section -->
+                    <div class="dice-results-section">
+                        <div class="dice-results-header">
+                            <h4>🎲 Risultati Dadi</h4>
+                        </div>
+                        <div class="dice-results-content" id="diceResults">
+                            <div class="no-results">Nessun lancio ancora...</div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Section -->
+                    <div class="chat-container">
+                        <div class="section-header">
+                            <h3>💬 Chat</h3>
+                        </div>
+
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="no-messages">Nessun messaggio ancora...</div>
+                        </div>
+
+                        <div class="chat-input">
+                            <input type="text" id="messageInput" placeholder="Scrivi un messaggio..." maxlength="500">
+                            <button id="sendMessageBtn" class="send-btn">📤</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Master Panel (Bottom Strip) -->
+        <div id="masterPanel" class="master-panel admin-only" style="display: none;">
+            <div class="master-panel-header">
+                <h3>⚙️ Pannello Master</h3>
+                <button id="closeMasterPanel" class="close-panel-btn">✕</button>
+            </div>
+            <div class="master-panel-content">
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button id="clearTokensBtn" class="quick-action-btn warning" title="Rimuovi Tutti i Token">🗑️
+                        Pulisci Token</button>
+                    <button id="clearChatBtn" class="quick-action-btn warning" title="Svuota Chat">💬 Pulisci
+                        Chat</button>
+                    <button id="clearAllBtn" class="quick-action-btn danger" title="Elimina Tutte le Risorse">💥 Elimina
+                        Tutto</button>
+
+                </div>
+
+                <!-- Asset Libraries -->
+                <div class="asset-libraries">
+                    <!-- Maps Library -->
+                    <div class="asset-library">
+                        <div class="library-header">
+                            <h4>🗺️ Mappe</h4>
+                            <button id="uploadMapBtn" class="quick-action-btn" title="Carica Mappa">🗺️</button>
+                            <span class="library-count" id="mapsCount">0</span>
+                        </div>
+                        <div class="library-content" id="mapsLibrary">
+                            <div class="no-assets">Nessuna mappa disponibile</div>
+                        </div>
+                    </div>
+
+                    <!-- Tokens Library -->
+                    <div class="asset-library">
+                        <div class="library-header">
+                            <h4>🎭 Token</h4>
+                            <button id="uploadTokenBtn" class="quick-action-btn" title="Carica Token">🎭</button>
+                            <span class="library-count" id="tokensCount">0</span>
+                        </div>
+                        <div class="library-content" id="tokensLibrary">
+                            <div class="no-assets">Nessun token disponibile</div>
+                        </div>
+                    </div>
+
+                    <!-- Assets Library -->
+                    <div class="asset-library">
+                        <div class="library-header">
+                            <h4>🖼️ Asset</h4>
+                            <button id="uploadAssetBtn" class="quick-action-btn" title="Carica Asset">🖼️</button>
+                            <span class="library-count" id="assetsCount">0</span>
+                        </div>
+                        <div class="library-content" id="assetsLibrary">
+                            <div class="no-assets">Nessun asset disponibile</div>
+                        </div>
+                    </div>
+
+                    <!-- Music Library -->
+                    <div class="asset-library">
+                        <div class="library-header">
+                            <h4>🎵 Musica</h4>
+                            <button id="uploadMusicBtn" class="quick-action-btn" title="Carica Musica">🎵</button>
+                            <span class="library-count" id="musicCount">0</span>
+                        </div>
+                        <div class="library-content" id="musicLibrary">
+                            <div class="no-assets">Nessuna musica disponibile</div>
+                        </div>
+                    </div>
+
+                    <!-- Sounds Library -->
+                    <div class="asset-library">
+                        <div class="library-header">
+                            <h4>🔊 Suoni</h4>
+                            <button id="uploadSoundBtn" class="quick-action-btn" title="Carica Suono">🔊</button>
+                            <span class="library-count" id="soundsCount">0</span>
+                        </div>
+                        <div class="library-content" id="soundsLibrary">
+                            <div class="no-assets">Nessun suono disponibile</div>
+                        </div>
+                    </div>
+
+                    <!-- Active Tokens on Map -->
+                    <div class="asset-library">
+                        <div class="library-header">
+                            <h4>🎯 Token sulla Mappa</h4>
+                            <span class="library-count" id="activeTokensCount">0</span>
+                        </div>
+                        <div class="library-content" id="activeTokensLibrary">
+                            <div class="no-assets">Nessun token sulla mappa</div>
+                        </div>
+                    </div>
+
+                    <!-- Active Assets on Map -->
+                    <div class="asset-library">
+                        <div class="library-header">
+                            <h4>🖼️ Asset sulla Mappa</h4>
+                            <span class="library-count" id="activeAssetsCount">0</span>
+                        </div>
+                        <div class="library-content" id="activeAssetsLibrary">
+                            <div class="no-assets">Nessun asset sulla mappa</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Character Sheet Modal -->
+    <div id="characterSheetModal" class="modal-overlay" style="display: none;">
+        <div class="modal-dialog character-sheet-dialog">
+            <div class="modal-header">
+                <h3>📋 Scheda Personaggio</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-content character-sheet-content">
+                <!-- Sheet Controls -->
+                <div class="sheet-controls">
+                    <button id="loadSheetBtn" class="sheet-btn">📁 Carica Scheda</button>
+                    <button id="removeSheetBtn" class="sheet-btn danger" disabled>🗑️ Rimuovi Scheda</button>
+                    <button id="addTextBtn" class="sheet-btn" disabled>📝 Aggiungi Testo</button>
+                    <button id="clearTextsBtn" class="sheet-btn warning" disabled>🗑️ Pulisci Testi</button>
+                    <button id="resetSheetZoomBtn" class="sheet-btn" disabled>🔍 Reset Zoom</button>
+                </div>
+                
+                <!-- Sheet Viewer -->
+                <div class="sheet-viewer" id="sheetViewer">
+                    <div class="sheet-container" id="sheetContainer">
+                        <div class="no-sheet">
+                            <p>Nessuna scheda caricata</p>
+                            <p>Clicca su "Carica Scheda" per iniziare</p>
+                        </div>
+                        <img id="sheetImage" class="sheet-image" style="display: none;">
+                        <div id="textBoxesLayer" class="text-boxes-layer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Sound Button Configuration Modal -->
+    <div id="soundConfigModal" class="modal-overlay" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3>🔊 Configura Pulsante Sonoro</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-content">
+                <div class="sound-config-form">
+                    <div class="form-group">
+                        <label for="soundButtonName">Nome Pulsante</label>
+                        <input type="text" id="soundButtonName" placeholder="Es: Battaglia, Ambiente, Effetto..." style="
+                            width: 100%;
+                            padding: 0.75rem;
+                            background: #2c1810;
+                            color: #d4af37;
+                            border: 1px solid #8b4513;
+                            border-radius: 6px;
+                            font-family: 'Cinzel', serif;
+                        ">
+                    </div>
+                    <div class="form-group">
+                        <label for="soundButtonColor">Colore Pulsante</label>
+                        <input type="color" id="soundButtonColor" value="#ff6b6b" style="
+                            width: 60px;
+                            height: 40px;
+                            border: 1px solid #8b4513;
+                            border-radius: 6px;
+                            cursor: pointer;
+                        ">
+                    </div>
+                    <div class="form-group">
+                        <label>Seleziona Musica</label>
+                        <div class="music-selection" id="musicSelection" style="
+                            max-height: 200px;
+                            overflow-y: auto;
+                            border: 1px solid #8b4513;
+                            border-radius: 6px;
+                            padding: 0.5rem;
+                            background: rgba(44, 24, 16, 0.5);
+                        ">
+                            <!-- Music options will be populated -->
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button id="saveSoundButton" class="save-btn" style="
+                            padding: 0.75rem 1.5rem;
+                            background: linear-gradient(135deg, #32cd32 0%, #228b22 100%);
+                            color: white;
+                            border: none;
+                            border-radius: 6px;
+                            font-family: 'Cinzel', serif;
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                            margin-right: 1rem;
+                        ">💾 Salva</button>
+                        <button id="cancelSoundConfig" class="cancel-btn" style="
+                            padding: 0.75rem 1.5rem;
+                            background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+                            color: #d4af37;
+                            border: none;
+                            border-radius: 6px;
+                            font-family: 'Cinzel', serif;
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        ">❌ Annulla</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden File Inputs -->
+    <input type="file" id="mapFileInput" accept="image/png,image/jpeg" style="display: none;">
+    <input type="file" id="tokenFileInput" accept="image/png" style="display: none;">
+    <input type="file" id="assetFileInput" accept="image/png,image/jpeg" style="display: none;">
+    <input type="file" id="musicFileInput" accept="audio/mp3,audio/wav,audio/ogg" style="display: none;">
+    <input type="file" id="soundFileInput" accept="audio/mp3,audio/wav,audio/ogg" style="display: none;">
+    <input type="file" id="sheetFileInput" accept="image/png,image/jpeg,image/webp" style="display: none;">
+
+    <!-- Audio element for music playback -->
+    <audio id="musicPlayer" preload="metadata"></audio>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js?v.100"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js?v.100"></script>
+
+    <!-- App Scripts -->
+    <script type="module" src="js/main.js?v.100" id="main-script"></script>
+        <script type="module" src="js/site-lock.js?v.100" id="main-script"></script>
+
+
+    <!-- Version Script with Enhanced Cache Busting -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.versionScriptLoaded) {
+                return;
+            }
+            window.versionScriptLoaded = true;
+
+            import('./js/version.js?v.100').then(module => {
+                const AppVersion = module.default;
+
+                const buildMeta = document.querySelector('meta[name="build"]');
+                if (buildMeta) {
+                    buildMeta.content = AppVersion.buildNumber;
+                }
+
+                const cssLink = document.getElementById('main-stylesheet');
+                if (cssLink && !cssLink.href.includes('v.100')) {
+                    const newHref = AppVersion.addVersionToUrl(cssLink.href.split('?')[0]);
+                    cssLink.href = newHref;
+                }
+
+                const reloadBtn = document.getElementById('reloadBtn');
+                if (reloadBtn) {
+                    reloadBtn.addEventListener('click', () => {
+                        AppVersion.checkAndReload();
+                    });
+                }
+
+            }).catch(error => {
+                console.error('❌ ERRORE caricamento sistema versioning:', error);
+            });
+        });
+    </script>
+</body>
+
+</html>
