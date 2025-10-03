@@ -53,30 +53,34 @@ export class PingSystem {
     async handleMapDoubleClick(event) {
         event.preventDefault();
         event.stopPropagation();
-        
+
         // Don't ping if dragging
         if (this.mapSystem.isDragging) return;
-        
+
         const user = this.authManager.getCurrentUser();
         const room = this.authManager.getCurrentRoom();
-        
+
         if (!user || !room) return;
-        
+
         // Check if we have a map loaded
         if (!this.mapSystem.getCurrentMap()) {
             console.log('📍 Nessuna mappa per ping');
             return;
         }
-        
-        // Get click position relative to map
+
+        // Get click position relative to viewport
+        const mapViewport = document.getElementById('mapViewport');
+        const rect = mapViewport.getBoundingClientRect();
+
+        // Convert screen coordinates to map coordinates (normalized)
         const mapCoords = this.mapSystem.screenToMapCoords(
             event.clientX,
             event.clientY
         );
-        
-        console.log('📍 Ping creato alle coordinate:', mapCoords);
-        
-        // Create ping data
+
+        console.log('📍 Ping creato - Screen:', event.clientX, event.clientY, '-> Map:', mapCoords);
+
+        // Create ping data with normalized coordinates
         const pingData = {
             id: FirebaseHelper.generateUserId(),
             userId: user.id,
@@ -88,7 +92,7 @@ export class PingSystem {
             timestamp: FirebaseHelper.getTimestamp(),
             expiresAt: Date.now() + this.pingDuration
         };
-        
+
         try {
             // Send ping to Firebase
             await FirebaseHelper.setData(`rooms/${room}/pings/${pingData.id}`, pingData);
@@ -155,21 +159,29 @@ export class PingSystem {
     showPing(pingId, pingData) {
         // Don't show ping if already exists
         if (this.activePings.has(pingId)) return;
-        
+
         // Check if we have a map
         if (!this.mapSystem.getCurrentMap()) return;
-        
+
+        const mapImage = document.getElementById('mapImage');
         const tokensLayer = document.getElementById('tokensLayer');
-        if (!tokensLayer) {
-            console.error('❌ Layer token non trovato per ping');
+
+        if (!tokensLayer || !mapImage) {
+            console.error('❌ Layer token o immagine mappa non trovati per ping');
             return;
         }
-        
+
+        // Verify coordinates are valid
+        if (isNaN(pingData.x) || isNaN(pingData.y)) {
+            console.error('❌ Coordinate ping invalide:', pingData);
+            return;
+        }
+
         const pingElement = document.createElement('div');
         pingElement.className = 'map-ping';
         pingElement.dataset.pingId = pingId;
-        
-        // Enhanced ping design
+
+        // Position using map coordinates (will scale with map)
         pingElement.style.cssText = `
             position: absolute;
             left: ${pingData.x}px;
@@ -180,6 +192,8 @@ export class PingSystem {
             z-index: 1000;
             transform: translate(-50%, -50%);
         `;
+
+        console.log('📍 Posizionamento ping:', pingId, 'alle coordinate:', pingData.x, pingData.y);
         
         // Create ripple effect
         const ripple1 = document.createElement('div');
@@ -250,14 +264,14 @@ export class PingSystem {
         pingElement.appendChild(centerDot);
         pingElement.appendChild(nameLabel);
         tokensLayer.appendChild(pingElement);
-        
+
         // Store ping reference
         this.activePings.set(pingId, {
             element: pingElement,
             data: pingData
         });
-        
-        console.log('📍 Ping visualizzato:', pingData.userName, 'alle coordinate:', pingData.x, pingData.y);
+
+        console.log('✅ Ping visualizzato:', pingData.userName, 'ID:', pingId, 'coordinate mappa:', pingData.x, pingData.y);
         
         // Auto-remove after duration
         setTimeout(() => {
