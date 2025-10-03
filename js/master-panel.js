@@ -74,6 +74,32 @@ export class MasterPanel {
         if (clearTokensBtn) clearTokensBtn.addEventListener('click', () => this.clearTokens());
         if (clearAllBtn) clearAllBtn.addEventListener('click', () => this.clearAll());
         if (clearChatBtn) clearChatBtn.addEventListener('click', () => this.clearChat());
+
+        // Setup collapsible library headers
+        this.setupLibraryToggles();
+    }
+
+    // Setup library toggle functionality
+    setupLibraryToggles() {
+        const libraries = document.querySelectorAll('.asset-library');
+
+        libraries.forEach(library => {
+            const header = library.querySelector('.library-header');
+            if (header) {
+                // Stop propagation for upload buttons
+                const uploadBtn = header.querySelector('.quick-action-btn');
+                if (uploadBtn) {
+                    uploadBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                }
+
+                // Toggle library on header click
+                header.addEventListener('click', () => {
+                    library.classList.toggle('collapsed');
+                });
+            }
+        });
     }
     
     // Handle file upload
