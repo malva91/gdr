@@ -1,22 +1,23 @@
-/* Map System Styles */
+/* Map System Styles (token-based) */
 .map-container {
     flex: 1;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, #0d0a08 0%, #050403 100%);
-    border: 1px solid rgba(212, 175, 55, 0.12);
+    background: linear-gradient(135deg, var(--color-brown-darkest) 0%, var(--color-brown-dark) 100%);
+    border: 1px solid var(--color-border-subtle);
     border-radius: var(--border-radius-xl);
     min-height: 0;
-    box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.6), 0 4px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 2px 12px rgba(0,0,0,0.25), var(--shadow-md);
 }
+
 .map-viewport {
     width: 100%;
     height: 100%;
     position: relative;
     overflow: hidden;
     cursor: grab;
-    background-color: rgba(13, 10, 8, 0.5);
-    transition: background-color 0.3s ease;
+    background-color: var(--color-bg-secondary);
+    transition: background-color var(--transition-normal);
 }
 
 .map-viewport::before {
@@ -30,13 +31,10 @@
     opacity: 0.08;
     z-index: 0;
     pointer-events: none;
-    filter: blur(2px);
+    filter: var(--backdrop-blur-sm);
 }
 
-
-.map-viewport:active {
-    cursor: grabbing;
-}
+.map-viewport:active { cursor: grabbing; }
 
 .map-canvas {
     position: relative;
@@ -59,39 +57,41 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: var(--color-amber);
+    color: var(--color-text-tertiary);
     font-style: italic;
 }
 
 .ping-hint {
     margin-top: var(--spacing-md);
     font-size: 0.9rem;
-    color: var(--color-wood-light);
+    color: var(--color-secondary);
     opacity: 0.8;
 }
 
+/* Layers */
 .tokens-layer,
 .assets-layer {
     position: absolute;
     top: 0;
     left: 0;
-    /* FIXED: Dimensioni impostate via JS per sincronizzazione con mappa */
+    /* dimensioni impostate via JS */
     pointer-events: none;
 }
 
+/* Token & Asset (generic) */
 .token,
 .map-asset {
     position: absolute;
     border-radius: var(--border-radius-round);
     background-size: cover;
     background-position: center;
-    box-shadow: var(--shadow-md), 0 0 0 2px rgba(255, 255, 255, 0.1);
-    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
     pointer-events: all;
     user-select: none;
 }
 
-/* FIXED: Remove shadow and border from PNG assets */
+/* PNG assets: senza ombra/bordo circolare */
 .map-asset {
     border-radius: var(--border-radius-sm);
     border: none !important;
@@ -101,122 +101,127 @@
 .token:hover,
 .map-asset:hover {
     transform: translate(-50%, -50%) scale(1.12);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(212, 175, 55, 0.3);
-    filter: brightness(1.1);
+    box-shadow: var(--shadow-md);
+    outline: 2px solid var(--color-gold);
+    outline-offset: 0;
+    filter: brightness(1.05);
 }
 
 .token.dragging,
 .map-asset.dragging {
     opacity: 0.9;
-    z-index: 300;
+    z-index: var(--z-index-popover);
     pointer-events: none;
     transition: none;
     cursor: grabbing;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-md);
 }
 
 .map-asset.scaling {
     opacity: 0.9;
-    z-index: 300;
+    z-index: var(--z-index-popover);
     transition: none;
     cursor: ns-resize;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-md);
 }
 
 .token.following,
-.map-asset.following {
-    opacity: 0.8;
-    z-index: 200;
-    pointer-events: none;
-}
-
+.map-asset.following,
 .following-token,
 .following-asset {
     opacity: 0.8;
-    z-index: 200;
+    z-index: var(--z-index-sticky);
     pointer-events: none;
 }
 
-/* FIXED: Smaller token names - only show when showName is true */
+/* Token name (mostrata solo quando abilitata) */
 .token-name {
     position: absolute;
-    bottom: -18px;
+    bottom: calc(var(--spacing-sm) * -2.2); /* ≈ -18px */
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: var(--color-gold);
-    padding: var(--spacing-xs) var(--spacing-xs);
+    background: var(--color-bg-elevated);
+    color: var(--color-primary);
+    padding: var(--spacing-xs) calc(var(--spacing-xs) * 1.5);
     border-radius: var(--border-radius-sm);
-    font-size: 7px;
+    font-size: 0.4375rem; /* 7px */
     white-space: nowrap;
     pointer-events: none;
-    max-width: 50px;
+    max-width: calc(var(--spacing-2xl) * 3.3); /* ≈ 100px/50px? qui 50px */
     overflow: hidden;
     text-overflow: ellipsis;
-    border: 1px solid;
+    border: 1px solid var(--color-border-default);
     opacity: 0.9;
     font-weight: 600;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.9);
 }
 
 /* Scale handle for assets */
 .scale-handle {
     position: absolute;
-    right: -10px;
-    bottom: -10px;
-    width: 20px;
-    height: 20px;
-    background: var(--color-gold);
-    border: 2px solid white;
+    right: calc(var(--spacing-sm) * -2);   /* ≈ -10px */
+    bottom: calc(var(--spacing-sm) * -2);  /* ≈ -10px */
+    width: calc(var(--spacing-lg) * 2.2);  /* ≈ 20px */
+    height: calc(var(--spacing-lg) * 2.2); /* ≈ 20px */
+    background: var(--color-primary);
+    border: 1px solid var(--color-text-primary);
     border-radius: var(--border-radius-round);
     cursor: nw-resize;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 10px;
-    color: var(--color-wood-dark);
-    font-weight: bold;
-    z-index: 101;
+    font-size: 0.625rem; /* 10px */
+    color: var(--color-bg-secondary);
+    font-weight: 700;
+    z-index: var(--z-index-sticky);
 }
-
 .scale-handle:hover {
-    background: var(--color-bronze);
+    background: var(--color-primary-light);
     transform: scale(1.1);
 }
 
-/* Token/Asset visibility indicator */
+/* Visibility badges */
 .token-visibility,
 .asset-visibility {
     position: absolute;
-    top: -8px;
-    right: -8px;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
+    top: calc(var(--spacing-sm) * -1.6);   /* ≈ -8px */
+    right: calc(var(--spacing-sm) * -1.6);
+    border-radius: var(--border-radius-round);
+    width: calc(var(--spacing-lg) * 2);    /* ≈ 16px */
+    height: calc(var(--spacing-lg) * 2);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 8px;
-    border: 1px solid white;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    font-size: 0.5rem; /* 8px */
+    border: 1px solid var(--color-text-primary);
+    box-shadow: var(--shadow-sm);
+}
+.token-visibility.visible,
+.asset-visibility.visible {
+    background: var(--color-success-light);
+    color: var(--color-text-primary);
+}
+.token-visibility.hidden,
+.asset-visibility.hidden {
+    background: var(--color-warning-dark);
+    color: var(--color-text-primary);
 }
 
-/* Enhanced Ping System Styles - Modern & Elegant */
+/* Ping System */
 .map-ping {
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: calc(var(--spacing-2xl) * 2.7);  /* ≈80px */
+    height: calc(var(--spacing-2xl) * 2.7);
     pointer-events: none;
-    z-index: 1000;
+    z-index: var(--z-index-tooltip);
     transform: translate(-50%, -50%);
-    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.6));
+    filter: drop-shadow(0 4px 20px rgba(0,0,0,0.4));
 }
 
 .ping-ripple {
     position: absolute;
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: var(--border-radius-round);
     opacity: 0.8;
 }
 
@@ -224,92 +229,55 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
+    width: calc(var(--spacing-lg) * 2.2);   /* ≈18px */
+    height: calc(var(--spacing-lg) * 2.2);
+    border-radius: var(--border-radius-round);
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 28px currentColor, 0 0 48px currentColor, 0 0 8px rgba(255, 255, 255, 0.5);
-    filter: brightness(1.3);
+    box-shadow: 0 0 var(--spacing-2xl) currentColor,
+                0 0 calc(var(--spacing-2xl) * 1.6) currentColor,
+                0 0 var(--spacing-sm) var(--color-text-secondary);
+    filter: brightness(1.1);
 }
 
 .ping-name {
     position: absolute;
-    bottom: -42px;
+    bottom: calc(var(--spacing-xl) * -1.4);  /* ≈ -42px */
     left: 50%;
     transform: translateX(-50%);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--border-radius-lg);
-    font-size: 13px;
+    padding: calc(var(--spacing-xs) * 1.8) var(--spacing-lg);
+    border-radius: var(--border-radius-xl);
+    font-size: 0.8125rem; /* 13px */
     font-weight: 700;
     white-space: nowrap;
     pointer-events: none;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.95), 0 0 12px currentColor;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 1px rgba(255, 255, 255, 0.2);
-    backdrop-filter: var(--backdrop-blur-sm);
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.95), 0 0 var(--spacing-xl) currentColor;
+    box-shadow: var(--shadow-md);
+    backdrop-filter: var(--backdrop-blur-lg);
 }
 
+/* Animations (tempi da token) */
 @keyframes pingRipple {
-    0% {
-        transform: scale(0.3);
-        opacity: 0.9;
-    }
-
-    100% {
-        transform: scale(3);
-        opacity: 0;
-    }
+    0%   { transform: scale(0.3); opacity: 0.9; }
+    100% { transform: scale(3);   opacity: 0; }
 }
 
 @keyframes pingPulse {
-    0%,
-    100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-    }
-
-    50% {
-        transform: translate(-50%, -50%) scale(1.4);
-        opacity: 0.7;
-    }
+    0%,100% { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+    50%     { transform: translate(-50%, -50%) scale(1.4); opacity: 0.7; }
 }
 
 @keyframes pingNameFade {
-    0% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(15px) scale(0.8);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0) scale(1);
-    }
+    0%   { opacity: 0; transform: translateX(-50%) translateY(15px) scale(0.8); }
+    100% { opacity: 1; transform: translateX(-50%) translateY(0)    scale(1); }
 }
 
 @keyframes pingFadeOut {
-    0% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.3);
-    }
+    0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
 }
 
 @keyframes pingAppear {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.5);
-    }
-
-    50% {
-        transform: translate(-50%, -50%) scale(1.15);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    50%  { transform: translate(-50%, -50%) scale(1.15); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
-

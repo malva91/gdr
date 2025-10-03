@@ -5,9 +5,7 @@
 }
 
 /* Music Player at top */
-.music-player {
-    flex: 0 0 auto;
-}
+.music-player { flex: 0 0 auto; }
 
 /* Chat and Dice Results Container */
 .chat-dice-container {
@@ -30,12 +28,11 @@
 }
 
 .dice-results-header {
-    padding: 0.875rem 1.25rem;
+    padding: calc(var(--spacing-sm) * 1.75) var(--spacing-lg); /* ≈0.875rem 1.25rem */
     background: var(--color-surface-1);
     border-bottom: 1px solid var(--color-border-subtle);
     flex-shrink: 0;
 }
-
 .dice-results-header h4 {
     color: var(--color-text-primary);
     font-family: var(--font-decorative);
@@ -47,7 +44,7 @@
 
 .dice-results-content {
     flex: 1;
-    padding: 0.75rem;
+    padding: calc(var(--spacing-sm) * 1.5); /* ≈0.75rem */
     overflow-y: auto;
     min-height: 0;
 }
@@ -62,7 +59,7 @@
 
 .chat-messages {
     flex: 1;
-    padding: 1rem;
+    padding: var(--spacing-md);
     overflow-y: auto;
     min-height: 0;
 }
@@ -70,35 +67,35 @@
 .no-messages {
     text-align: center;
     color: var(--color-text-tertiary);
-    padding: 2rem;
+    padding: var(--spacing-xl);
     font-weight: 500;
     font-size: 0.9rem;
 }
 
+/* Singolo messaggio */
 .chat-message {
     background: var(--color-surface-2);
     border: 1px solid var(--color-border-default);
     border-radius: var(--border-radius-lg);
-    padding: 1rem;
-    margin-bottom: 0.75rem;
-    border-left: 3px solid var(--color-primary);
+    padding: var(--spacing-md);
+    margin-bottom: calc(var(--spacing-sm) * 1.5); /* ≈0.75rem */
+    border-left: calc(var(--spacing-xs) * 0.75) solid var(--color-primary); /* ≈3px */
     backdrop-filter: var(--backdrop-blur-sm);
     box-shadow: var(--shadow-sm);
     transition: all var(--transition-normal);
-    animation: messageSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: messageSlideIn var(--transition-normal);
 }
-
 .chat-message:hover {
     background: var(--color-surface-3);
     border-color: var(--color-border-strong);
     box-shadow: var(--shadow-md);
-    transform: translateX(3px);
+    transform: translateX(var(--spacing-xs));
 }
 
 @keyframes messageSlideIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(calc(var(--spacing-sm) * 1.25)); /* ≈10px */
     }
     to {
         opacity: 1;
@@ -106,16 +103,17 @@
     }
 }
 
+/* Header del messaggio */
 .message-header {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
 }
 
 .message-avatar {
-    width: 28px;
-    height: 28px;
+    width: calc(var(--spacing-lg) * 1.2);  /* ≈28px */
+    height: calc(var(--spacing-lg) * 1.2);
     border-radius: var(--border-radius-round);
     background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
     display: flex;
@@ -124,13 +122,13 @@
     font-size: 0.95rem;
     background-size: cover;
     background-position: center;
-    border: 2px solid var(--color-border-default);
+    border: 1px solid var(--color-border-default);
 }
 
 .message-user {
     font-weight: 600;
     color: var(--color-text-primary);
-    max-width: 140px;
+    max-width: calc(var(--spacing-2xl) * 3); /* ≈140px */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -144,6 +142,7 @@
     font-weight: 500;
 }
 
+/* Testo del messaggio */
 .message-text {
     color: var(--color-text-secondary);
     line-height: 1.5;
@@ -151,10 +150,11 @@
     font-size: 0.9rem;
 }
 
+/* Input chat */
 .chat-input {
     display: flex;
-    gap: 0.75rem;
-    padding: 1rem 1.25rem;
+    gap: calc(var(--spacing-sm) * 1.5); /* ≈0.75rem */
+    padding: var(--spacing-md) var(--spacing-lg);
     background: var(--color-bg-elevated);
     border-top: 1px solid var(--color-border-default);
     flex-shrink: 0;
@@ -164,29 +164,26 @@
 
 #messageInput {
     flex: 1;
-    padding: 0.875rem 1rem;
+    padding: calc(var(--spacing-md) * 0.875) var(--spacing-md); /* ≈0.875rem 1rem */
     background: var(--color-surface-1);
-    border: 1.5px solid var(--color-border-default);
+    border: 1px solid var(--color-border-default);
     border-radius: var(--border-radius-lg);
     color: var(--color-text-primary);
     font-family: var(--font-primary);
     transition: all var(--transition-normal);
     font-size: 0.9rem;
 }
-
-#messageInput::placeholder {
-    color: var(--color-text-tertiary);
-}
-
+#messageInput::placeholder { color: var(--color-text-tertiary); }
 #messageInput:focus {
     outline: none;
     border-color: var(--color-primary);
     background: var(--color-surface-2);
-    box-shadow: 0 0 0 4px rgba(232, 184, 109, 0.1);
+    box-shadow: var(--shadow-glow-primary);
 }
 
+/* Invia */
 .send-btn {
-    padding: 0.875rem 1.25rem;
+    padding: calc(var(--spacing-md) * 0.875) var(--spacing-lg);
     background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
     color: var(--color-bg-primary);
     border: none;
@@ -195,23 +192,19 @@
     transition: all var(--transition-normal);
     font-size: 1.15rem;
     box-shadow: var(--shadow-sm), var(--shadow-glow-primary);
-    min-width: 52px;
+    min-width: calc(var(--spacing-lg) * 2.2); /* ≈52px */
 }
-
 .send-btn:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md), var(--shadow-glow-primary);
 }
-
-.send-btn:active {
-    transform: translateY(0);
-}
+.send-btn:active { transform: translateY(0); }
 
 /* Dice Results Styles */
 .no-results {
     text-align: center;
     color: var(--color-text-tertiary);
-    padding: 1.5rem;
+    padding: calc(var(--spacing-lg) * 1.5);
     font-weight: 500;
     font-size: 0.9rem;
 }
@@ -220,13 +213,12 @@
     background: var(--color-surface-2);
     border: 1px solid var(--color-border-default);
     border-radius: var(--border-radius-md);
-    padding: 0.875rem;
-    margin-bottom: 0.625rem;
-    border-left: 3px solid var(--color-primary);
+    padding: calc(var(--spacing-md) * 0.875); /* ≈0.875rem */
+    margin-bottom: calc(var(--spacing-sm) * 1.25); /* ≈0.625rem */
+    border-left: calc(var(--spacing-xs) * 0.75) solid var(--color-primary); /* ≈3px */
     box-shadow: var(--shadow-sm);
     transition: all var(--transition-normal);
 }
-
 .dice-result:hover {
     background: var(--color-surface-3);
     box-shadow: var(--shadow-md);
@@ -235,13 +227,13 @@
 .result-header {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
 }
 
 .result-avatar {
-    width: 25px;
-    height: 25px;
+    width: calc(var(--spacing-lg) * 1.05);  /* ≈25px */
+    height: calc(var(--spacing-lg) * 1.05);
     border-radius: var(--border-radius-round);
     background: var(--color-secondary);
     display: flex;
@@ -255,7 +247,7 @@
 .result-user {
     font-weight: 600;
     color: var(--color-primary);
-    max-width: 120px;
+    max-width: calc(var(--spacing-2xl) * 2.5); /* ≈120px */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -267,40 +259,37 @@
     margin-left: auto;
 }
 
-.result-groups {
-    margin-bottom: 0.5rem;
-}
+.result-groups { margin-bottom: var(--spacing-sm); }
+.result-group { margin-bottom: calc(var(--spacing-xs) * 1); }
 
-.result-group {
-    margin-bottom: 0.25rem;
-}
-
+/* Dadi */
 .group-dice {
     display: inline-flex;
-    gap: 0.25rem;
-    margin-right: 0.5rem;
+    gap: var(--spacing-xs);
+    margin-right: var(--spacing-sm);
 }
 
 .die-value {
     display: inline-block;
-    padding: 0.2rem 0.4rem;
-    border-radius: 3px;
+    padding: calc(var(--spacing-xs) * 0.8) var(--spacing-sm); /* ≈0.2rem 0.4rem → arrotondato */
+    border-radius: var(--border-radius-sm);
     font-weight: 600;
     font-size: 0.9rem;
-    min-width: 25px;
+    min-width: calc(var(--spacing-lg) * 1.05); /* ≈25px */
     text-align: center;
 }
 
+/* Stati speciali */
 .die-value.critical-success {
     background: var(--color-success-dark);
-    color: white;
-    box-shadow: 0 0 8px rgba(34, 139, 34, 0.6);
+    color: var(--color-text-primary);
+    box-shadow: 0 0 var(--spacing-xl) var(--color-success-light);
 }
 
 .die-value.critical-failure {
     background: var(--color-error-dark);
-    color: white;
-    box-shadow: 0 0 8px rgba(139, 0, 0, 0.6);
+    color: var(--color-text-primary);
+    box-shadow: 0 0 var(--spacing-xl) var(--color-error);
 }
 
 .result-total {
@@ -308,8 +297,7 @@
     color: var(--color-primary);
     font-size: 1.1rem;
     text-align: center;
-    padding: 0.5rem;
-    background: rgba(212, 175, 55, 0.1);
-    border-radius: 4px;
+    padding: var(--spacing-sm);
+    background: var(--color-bg-card);
+    border-radius: var(--border-radius-sm);
 }
-

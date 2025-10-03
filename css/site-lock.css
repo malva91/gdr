@@ -1,7 +1,7 @@
 .site-lock {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.9);
+    background: var(--color-bg-primary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,38 +10,43 @@
 }
 
 .lock-container {
-    background: var(--color-gray-dark);
-    color: var(--color-gray-light);
-    border: 3px solid var(--color-tertiary-gold);
-    border-radius: 1rem;
-    padding: 2rem 3rem;
+    background: var(--color-surface-2);
+    color: var(--color-text-primary);
+    border: 3px solid var(--color-gold);
+    border-radius: var(--border-radius-xl);
+    padding: var(--spacing-xl) var(--spacing-2xl);
     text-align: center;
-    max-width: 320px;
+    max-width: 20rem;
     width: 90%;
 }
 
 .lock-title {
     font-size: 1.4rem;
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-gold-light);
+    font-family: var(--font-decorative);
 }
 
 .lock-input {
     width: 100%;
-    padding: 0.6rem 1rem;
+    padding: var(--spacing-sm) var(--spacing-md);
     font-size: 1rem;
-    border: 1px solid var(--color-gray-medium);
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-md);
+    background: var(--color-surface-1);
+    color: var(--color-text-primary);
 }
 
 .lock-btn {
-    background: var(--color-tertiary-gold);
-    color: var(--color-white);
+    background: var(--color-gold);
+    color: var(--color-text-primary);
     border: none;
-    border-radius: 0.5rem;
-    padding: 0.6rem 1.5rem;
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-sm) var(--spacing-lg);
     font-size: 1rem;
     cursor: pointer;
+    transition: var(--transition-normal);
 }
 
 .lock-btn:hover {
@@ -49,32 +54,33 @@
 }
 
 .lock-error {
-    color: crimson;
-    margin-top: 0.7rem;
+    color: var(--color-error);
+    margin-top: var(--spacing-sm);
+    font-size: 0.9rem;
 }
 
 .version-display {
     position: fixed;
-    bottom: 10px;
-    left: 10px;
+    bottom: var(--spacing-sm);
+    left: var(--spacing-sm);
     z-index: var(--z-index-site-lock);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    background: rgba(44, 24, 16, 0.9);
+    gap: var(--spacing-sm);
+    background: var(--color-bg-card);
     border: 1px solid var(--color-brown-dark);
     border-radius: var(--border-radius-md);
-    padding: 0.25rem 0.5rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
     font-size: 0.75rem;
-    color: var(--color-secondary-gold);
+    color: var(--color-gold-light);
 }
 
 .reload-btn {
     background: var(--color-brown-dark);
-    color: var(--color-primary-gold);
+    color: var(--color-gold-bright);
     border: none;
-    border-radius: 3px;
-    padding: 0.25rem;
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-xs);
     cursor: pointer;
     font-size: 0.7rem;
     transition: var(--transition-normal);

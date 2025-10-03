@@ -1,14 +1,65 @@
 :root {
-    /* === COLORI TAVERNA MEDIEVALE === */
-    /* Legno scuro, ambra, oro, bronzo, rosso scuro */
-    --color-wood-dark: #2c1810;
-    --color-wood-medium: #3d2716;
-    --color-wood-light: #6b4423;
-    --color-amber: #cd853f;
-    --color-gold: #d4af37;
-    --color-bronze: #cd7f32;
+    /* 🎨 Palette principale (legno, rame, candela) */
+    --color-primary: #b9853f;        /* amber birra */
+    --color-primary-dark: #8a5e2b;   /* rovere scuro */
+    --color-primary-light: #d6a35a;  /* miele/candela */
+    --color-secondary: #5a3a1f;      /* noce */
+    --color-accent: #8c6e3d;         /* ottone/cuoio */
+    --color-accent-light: #c2a66b;   /* ottone chiaro */
+    --color-gold: #b08d57;           /* bronzo spento */
+    --color-gold-light: #d1b464;     /* riflesso candela */
+    --color-gold-bright: #ffd700;    /* accento raro/ornamenti */
 
-    /* === SPAZIATURE === */
+    /* 🌌 Background (taverna, fuliggine) */
+    --color-bg-primary: #12100e;     /* sala buia */
+    --color-bg-secondary: #1a1410;   /* travi */
+    --color-bg-tertiary: #221b15;    /* tavolo */
+    --color-bg-card: rgba(46, 36, 28, 0.6);
+    --color-bg-elevated: rgba(60, 47, 36, 0.8);
+    --color-surface-1: #1a1511;
+    --color-surface-2: #241c15;
+    --color-surface-3: #2e241b;
+
+    /* 📝 Testi (pergamena) */
+    --color-text-primary: #f5efe1;   /* pergamena chiara */
+    --color-text-secondary: #cfc4a8;
+    --color-text-tertiary: #9f947a;
+    --color-text-disabled: #6b6152;
+
+    /* 🔲 Bordi */
+    --color-border-subtle: rgba(245, 239, 225, 0.08);
+    --color-border-default: rgba(245, 239, 225, 0.12);
+    --color-border-strong: rgba(245, 239, 225, 0.20);
+
+    /* ✅ Stati (classici: verde/giallo/rosso) */
+    --color-success: #2e7d32;        /* verde classico */
+    --color-success-light: #4caf50;
+    --color-success-dark: #1b5e20;
+    --color-warning: #f59e0b;        /* giallo ambra */
+    --color-warning-light: #ffd54f;
+    --color-warning-dark: #ff8f00;
+    --color-error: #c0392b;          /* rosso classico */
+    --color-error-light: #e57373;
+    --color-error-dark: #8e1717;
+    --color-info: #4a6782;           /* ferro/blu acciaio */
+
+    /* 🌑 Toni neutri / extra (cuoio, rame, ferro, pergamena) */
+    --color-brown-darkest: #0d0a08;
+    --color-brown-dark: #2b1e14;
+    --color-brown-medium: #3a281c;
+    --color-brown-light: #4a3323;
+    --color-brown-copper: #a66d3b;   /* rame */
+    --color-leather: #7a5130;        /* cuoio */
+    --color-parchment: #efe2c1;      /* pergamena */
+    --color-iron: #3f454b;           /* ferro */
+    --color-gray-dark: #222;
+    --color-gray-light: #e9e4d3;     /* polvere */
+
+    /* 🔤 Font */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-decorative: 'Playfair Display', 'Cinzel', serif;
+
+    /* 📏 Spaziature */
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
@@ -16,7 +67,7 @@
     --spacing-xl: 2rem;
     --spacing-2xl: 3rem;
 
-    /* === BORDI === */
+    /* ⭕ Raggi bordi */
     --border-radius-sm: 6px;
     --border-radius-md: 10px;
     --border-radius-lg: 14px;
@@ -24,32 +75,32 @@
     --border-radius-2xl: 24px;
     --border-radius-round: 50%;
 
-    /* === TRANSIZIONI === */
+    /* ⏳ Transizioni */
     --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* === OMBRE === */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
-    --shadow-glow: 0 0 20px rgba(212, 175, 55, 0.3);
+    /* 🌫️ Ombre (luce di candela) */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.28);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.34);
+    --shadow-2xl: 0 24px 64px rgba(0, 0, 0, 0.42);
+    --shadow-glow-primary: 0 0 20px rgba(209, 180, 100, 0.28);
+    --shadow-glow-accent: 0 0 20px rgba(166, 109, 59, 0.26);
 
-    /* === FONT === */
-    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-decorative: 'Cinzel', 'Uncial Antiqua', serif;
+    /* 🔍 Effetti visivi */
+    --backdrop-blur-sm: blur(8px);
+    --backdrop-blur-md: blur(16px);
+    --backdrop-blur-lg: blur(24px);
 
-    /* === Z-INDEX === */
+    /* 📐 Z-index */
     --z-index-base: 1;
     --z-index-dropdown: 100;
     --z-index-sticky: 200;
     --z-index-fixed: 300;
     --z-index-modal: 1000;
+    --z-index-popover: 9999;
     --z-index-tooltip: 10000;
-
-    /* === BACKDROP === */
-    --backdrop-blur-sm: blur(8px);
-    --backdrop-blur-md: blur(16px);
-    --backdrop-blur-lg: blur(24px);
+    --z-index-site-lock: 10001;
 }

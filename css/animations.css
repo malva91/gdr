@@ -1,130 +1,74 @@
-/* Animation Classes */
-.fade-in {
-    animation: fadeIn 0.5s ease-in-out;
-}
+/* Animation Classes (token-based) */
+.fade-in { animation: fadeIn var(--transition-smooth); }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(var(--spacing-lg));
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-.slide-in {
-    animation: slideIn 0.3s ease-out;
-}
+.slide-in { animation: slideIn var(--transition-fast); }
 
 @keyframes slideIn {
-    from {
-        transform: translateX(-100%);
-    }
-
-    to {
-        transform: translateX(0);
-    }
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(0); }
 }
 
-.slide-out {
-    animation: slideOut 0.3s ease-in;
-}
+.slide-out { animation: slideOut var(--transition-fast); }
 
 @keyframes slideOut {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(100%);
-    }
+    from { transform: translateX(0); }
+    to   { transform: translateX(100%); }
 }
 
+.slide-in-right { animation: slideInRight var(--transition-fast); }
 @keyframes slideInRight {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+    from { transform: translateX(100%); opacity: 0; }
+    to   { transform: translateX(0);   opacity: 1; }
 }
 
+.slide-out-right { animation: slideOutRight var(--transition-fast); }
 @keyframes slideOutRight {
-    from {
-        transform: translateX(0);
-        opacity: 1;
-    }
-
-    to {
-        transform: translateX(100%);
-        opacity: 0;
-    }
+    from { transform: translateX(0);   opacity: 1; }
+    to   { transform: translateX(100%); opacity: 0; }
 }
 
+.scale-in { animation: scaleIn var(--transition-normal); }
 @keyframes scaleIn {
-    from {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
+    from { transform: scale(0.8); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
 }
 
-/* Loading Animation */
-.loading {
-    position: relative;
-    pointer-events: none;
-}
-
+/* Loading (token-based) */
+.loading { position: relative; pointer-events: none; }
 .loading::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--color-secondary);
-    border-top: 2px solid var(--color-primary);
+    top: 50%; left: 50%;
+    width: calc(var(--spacing-2xl) * 0.67);   /* ≈20px */
+    height: calc(var(--spacing-2xl) * 0.67);  /* ≈20px */
+    border: calc(var(--spacing-xs) * 0.5) solid var(--color-secondary);
+    border-top: calc(var(--spacing-xs) * 0.5) solid var(--color-primary);
     border-radius: var(--border-radius-round);
-    animation: spin 1s linear infinite;
+    animation: spin var(--transition-smooth) linear infinite;
     transform: translate(-50%, -50%);
+    z-index: var(--z-index-dropdown);
 }
 
 @keyframes spin {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-
-    100% {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
+    0%   { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* Pulse animation for new messages/results */
-.pulse {
-    animation: pulse 0.6s ease-in-out;
-}
-
+.pulse { animation: pulse var(--transition-fast); }
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.05);
-    }
-
-    100% {
-        transform: scale(1);
-    }
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
-

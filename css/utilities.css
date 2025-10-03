@@ -13,7 +13,7 @@
 }
 
 .user-item.offline {
-    border-left: 3px solid var(--color-brown-peru);
+    border-left: 3px solid var(--color-brown-copper);
     opacity: 0.7;
 }
 
@@ -21,55 +21,57 @@
 .connection-status {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: rgba(44, 24, 16, 0.8);
-    border: 1px solid var(--color-brown-lighter);
-    border-radius: 8px;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-brown-light);
+    border-radius: var(--border-radius-md);
     font-size: 0.85rem;
-    margin-right: 0.5rem;
+    margin-right: var(--spacing-sm);
 }
 
 .status-indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--color-brown-peru);
-    transition: all 0.3s ease;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    width: var(--spacing-md);
+    height: var(--spacing-md);
+    border-radius: var(--border-radius-round);
+    background: var(--color-brown-copper);
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
 }
 
+/* Stati della connessione */
 .connection-status.connected .status-indicator {
     background: var(--color-success-light);
-    box-shadow: 0 0 12px rgba(50, 205, 50, 0.6);
+    box-shadow: 0 0 var(--spacing-lg) var(--color-success-light);
     animation: pulse-glow 2s ease-in-out infinite;
 }
 
 .connection-status.disconnected .status-indicator {
     background: var(--color-error-light);
-    box-shadow: 0 0 12px rgba(220, 20, 60, 0.6);
+    box-shadow: 0 0 var(--spacing-lg) var(--color-error-light);
 }
 
 .connection-status.reconnecting .status-indicator {
     background: var(--color-warning-light);
-    box-shadow: 0 0 12px rgba(255, 165, 0, 0.6);
+    box-shadow: 0 0 var(--spacing-lg) var(--color-warning-light);
     animation: pulse-warning 1s ease-in-out infinite;
 }
 
+/* Animazioni */
 @keyframes pulse-glow {
     0%, 100% {
-        box-shadow: 0 0 12px rgba(50, 205, 50, 0.6);
+        box-shadow: 0 0 var(--spacing-lg) var(--color-success-light);
     }
     50% {
-        box-shadow: 0 0 20px rgba(50, 205, 50, 0.9);
+        box-shadow: 0 0 var(--spacing-xl) var(--color-success-light);
     }
 }
 
 @keyframes pulse-warning {
     0%, 100% {
-        box-shadow: 0 0 12px rgba(255, 165, 0, 0.6);
+        box-shadow: 0 0 var(--spacing-lg) var(--color-warning-light);
     }
     50% {
-        box-shadow: 0 0 20px rgba(255, 165, 0, 0.9);
+        box-shadow: 0 0 var(--spacing-xl) var(--color-warning-light);
     }
 }

@@ -1,6 +1,6 @@
-/* Scrollbar Styling */
+/* 🎚️ Scrollbar Styling */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: var(--spacing-sm);
 }
 
 ::-webkit-scrollbar-track {
@@ -8,11 +8,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--color-brown-lighter);
-    border-radius: 4px;
+    background: var(--color-brown-copper);
+    border-radius: var(--border-radius-sm);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-brown-lightest);
+    background: var(--color-brown-light);
 }
-
