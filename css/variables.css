@@ -1,49 +1,68 @@
 :root {
-    --color-primary-gold: #d4af37;
-    --color-secondary-gold: #cd853f;
-    --color-tertiary-gold: #b8860b;
-    --color-bright-gold: #ffd700;
+    --color-primary: #e8b86d;
+    --color-primary-dark: #c9965a;
+    --color-primary-light: #f5d7a0;
+    --color-secondary: #6b4423;
+    --color-accent: #2a9d8f;
+    --color-accent-light: #52b9ab;
 
-    --color-bg-dark-1: #1a1410;
-    --color-bg-dark-2: #0d0a08;
-    --color-bg-dark-3: #2c1810;
-    --color-bg-dark-4: #1a0f08;
-    --color-bg-dark-5: #050403;
+    --color-bg-primary: #0f1419;
+    --color-bg-secondary: #1a1f26;
+    --color-bg-tertiary: #252b35;
+    --color-bg-card: rgba(42, 48, 58, 0.6);
+    --color-bg-elevated: rgba(55, 62, 75, 0.8);
 
-    --color-brown-dark: #8b4513;
-    --color-brown-medium: #a0522d;
-    --color-brown-light: #cd7f32;
-    --color-brown-darker: #3d2716;
-    --color-brown-darkest: #2c1810;
+    --color-surface-1: #1e2329;
+    --color-surface-2: #2a3038;
+    --color-surface-3: #363d48;
 
-    --color-text-light: #f0e6d2;
-    --color-text-muted: rgba(240, 230, 210, 0.6);
+    --color-text-primary: #f8f9fa;
+    --color-text-secondary: #b8bcc4;
+    --color-text-tertiary: #7d8390;
+    --color-text-disabled: #4a5160;
 
-    --color-red-dark: #8b0000;
-    --color-red-medium: #a52a2a;
+    --color-border-subtle: rgba(248, 249, 250, 0.08);
+    --color-border-default: rgba(248, 249, 250, 0.12);
+    --color-border-strong: rgba(248, 249, 250, 0.2);
 
-    --font-primary: 'Cinzel', serif;
-    --font-decorative: 'Uncial Antiqua', serif;
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+    --color-info: #3b82f6;
 
-    --border-radius-sm: 4px;
-    --border-radius-md: 6px;
-    --border-radius-lg: 8px;
-    --border-radius-xl: 10px;
-    --border-radius-2xl: 15px;
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-decorative: 'Playfair Display', 'Cinzel', serif;
+
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+
+    --border-radius-sm: 6px;
+    --border-radius-md: 10px;
+    --border-radius-lg: 14px;
+    --border-radius-xl: 18px;
+    --border-radius-2xl: 24px;
     --border-radius-round: 50%;
 
-    --transition-fast: 0.2s ease;
-    --transition-normal: 0.3s ease;
-    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.5);
-    --shadow-xl: 0 4px 24px rgba(0, 0, 0, 0.3);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.25);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.35);
+    --shadow-2xl: 0 24px 64px rgba(0, 0, 0, 0.45);
 
-    --backdrop-blur-sm: blur(4px);
-    --backdrop-blur-md: blur(8px);
-    --backdrop-blur-lg: blur(12px);
+    --shadow-glow-primary: 0 0 20px rgba(232, 184, 109, 0.3);
+    --shadow-glow-accent: 0 0 20px rgba(42, 157, 143, 0.3);
+
+    --backdrop-blur-sm: blur(8px);
+    --backdrop-blur-md: blur(16px);
+    --backdrop-blur-lg: blur(24px);
 
     --z-index-base: 1;
     --z-index-dropdown: 100;

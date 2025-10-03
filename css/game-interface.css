@@ -1,8 +1,8 @@
-/* Game Interface Styles */
 .game-interface {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    background: var(--color-bg-primary);
 }
 
 .game-header {
@@ -10,152 +10,176 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem 1.5rem;
-    background: linear-gradient(135deg, rgba(26, 20, 16, 0.98) 0%, rgba(13, 10, 8, 0.98) 100%);
-    border-bottom: 1px solid rgba(240, 230, 210, 0.15);
-    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(12px);
+    background: var(--color-bg-elevated);
+    border-bottom: 1px solid var(--color-border-subtle);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: var(--backdrop-blur-md);
+    z-index: var(--z-index-sticky);
+    min-height: 72px;
 }
 
 .room-info h2 {
-    font-family: 'Uncial Antiqua', serif;
-    font-size: 1.6rem;
-    color: #f0e6d2;
-    margin-bottom: 0.2rem;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    font-family: var(--font-decorative);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 12px rgba(232, 184, 109, 0.3);
 }
 
 .room-subtitle {
-    font-size: 0.85rem;
-    color: rgba(240, 230, 210, 0.6);
-    font-style: italic;
-    font-weight: 400;
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    letter-spacing: 0.01em;
 }
 
 .users-list {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     align-items: center;
     flex-wrap: wrap;
     max-width: 50%;
-    min-height: 40px;
-    /* Ensure space is reserved */
+    min-height: 44px;
 }
 
 .user-item {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.5rem 0.9rem;
-    background: rgba(240, 230, 210, 0.06);
-    border: 1px solid rgba(240, 230, 210, 0.15);
-    border-radius: 28px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: userFadeIn 0.5s ease-out;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    gap: 0.625rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border-default);
+    border-radius: 100px;
+    transition: all var(--transition-normal);
+    animation: userFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: var(--backdrop-blur-sm);
+    box-shadow: var(--shadow-sm);
 }
 
 @keyframes userFadeIn {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(-8px) scale(0.95);
     }
-
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
 .user-item:hover {
-    background: rgba(240, 230, 210, 0.12);
-    border-color: rgba(240, 230, 210, 0.3);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(240, 230, 210, 0.15);
+    background: var(--color-surface-3);
+    border-color: var(--color-border-strong);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .user-avatar {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: #8b4513;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--border-radius-round);
+    background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     background-size: cover;
     background-position: center;
     flex-shrink: 0;
+    border: 2px solid var(--color-border-default);
 }
 
 .user-name {
     font-size: 0.9rem;
-    color: #f0e6d2;
+    color: var(--color-text-primary);
     font-weight: 600;
-    max-width: 100px;
+    max-width: 120px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .user-item.master {
-    border-color: rgba(255, 215, 0, 0.4);
-    background: rgba(255, 215, 0, 0.08);
+    border-color: var(--color-primary);
+    background: rgba(232, 184, 109, 0.1);
+    box-shadow: var(--shadow-md), var(--shadow-glow-primary);
 }
 
 .user-item.master .user-name {
-    color: #ffd700;
-    text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+    color: var(--color-primary);
+}
+
+.user-item.master .user-avatar {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-glow-primary);
 }
 
 .header-actions {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.625rem;
     align-items: center;
 }
 
 .header-btn {
-    padding: 0.6rem;
-    background: rgba(240, 230, 210, 0.08);
-    color: #f0e6d2;
-    border: 1px solid rgba(240, 230, 210, 0.2);
-    border-radius: 10px;
-    font-size: 1.2rem;
+    padding: 0.625rem;
+    background: var(--color-surface-2);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-md);
+    font-size: 1.15rem;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all var(--transition-normal);
     min-width: 44px;
     height: 44px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: var(--backdrop-blur-sm);
 }
 
 .header-btn:hover {
-    background: rgba(240, 230, 210, 0.15);
-    border-color: rgba(240, 230, 210, 0.35);
+    background: var(--color-surface-3);
+    border-color: var(--color-primary);
     transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(240, 230, 210, 0.15);
+    box-shadow: var(--shadow-md);
+    color: var(--color-primary);
+}
+
+.header-btn:active {
+    transform: translateY(0);
 }
 
 .exit-btn {
-    padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, #8b0000 0%, #a52a2a 100%);
-    color: #d4af37;
+    padding: 0.625rem 1.25rem;
+    background: var(--color-error);
+    color: white;
     border: none;
-    border-radius: 6px;
-    font-family: 'Cinzel', serif;
+    border-radius: var(--border-radius-md);
+    font-family: var(--font-primary);
     font-weight: 600;
+    font-size: 0.9rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
 }
 
 .exit-btn:hover {
-    background: linear-gradient(135deg, #a52a2a 0%, #8b0000 100%);
-    transform: translateY(-1px);
+    background: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.exit-btn:active {
+    transform: translateY(0);
 }
 
 .game-main {
     display: flex;
     flex: 1;
     overflow: hidden;
+    gap: 0;
 }
 
