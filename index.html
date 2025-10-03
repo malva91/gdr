@@ -369,13 +369,16 @@
             <div class="modal-content character-sheet-content">
                 <!-- Sheet Controls -->
                 <div class="sheet-controls">
-                    <button id="loadSheetBtn" class="sheet-btn">📁 Carica Scheda</button>
-                    <button id="removeSheetBtn" class="sheet-btn danger" disabled>🗑️ Rimuovi Scheda</button>
-                    <button id="addTextBtn" class="sheet-btn" disabled>📝 Aggiungi Testo</button>
-                    <button id="clearTextsBtn" class="sheet-btn warning" disabled>🗑️ Pulisci Testi</button>
-                    <button id="resetSheetZoomBtn" class="sheet-btn" disabled>🔍 Reset Zoom</button>
+                    <!-- Tabs will be dynamically inserted here -->
+                    <div class="sheet-buttons">
+                        <button id="loadSheetBtn" class="sheet-btn">📁 Carica</button>
+                        <button id="removeSheetBtn" class="sheet-btn danger" disabled>🗑️ Rimuovi</button>
+                        <button id="addTextBtn" class="sheet-btn" disabled>📝 Testo</button>
+                        <button id="clearTextsBtn" class="sheet-btn warning" disabled>🗑️ Pulisci Testi</button>
+                        <button id="resetSheetZoomBtn" class="sheet-btn" disabled>🔍 Reset</button>
+                    </div>
                 </div>
-                
+
                 <!-- Sheet Viewer -->
                 <div class="sheet-viewer" id="sheetViewer">
                     <div class="sheet-container" id="sheetContainer">

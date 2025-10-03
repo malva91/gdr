@@ -16,15 +16,15 @@
 /* Tabs wrapper (unificata) */
 .sheet-tabs {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-lg);
-    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
     background: var(--color-bg-card);
     border: 1px solid var(--color-border-default);
     border-radius: var(--border-radius-md);
-    max-height: calc(var(--spacing-2xl) * 2.5); /* ≈120px */
-    overflow-y: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 /* Singolo tab (unificato) */
@@ -97,22 +97,31 @@
 /* Controls bar */
 .sheet-controls {
     display: flex;
-    flex-direction: row;
-    gap: var(--spacing-lg);
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: var(--spacing-md);
     padding-bottom: var(--spacing-md);
     border-bottom: 1px solid var(--color-border-default);
     flex-shrink: 0;
 }
-.sheet-controls > div:last-child {
+
+/* Tabs wrapper */
+.sheet-tabs-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+/* Buttons container */
+.sheet-buttons {
     display: flex;
     gap: var(--spacing-sm);
     flex-wrap: wrap;
+    align-items: center;
 }
 
 /* Buttons */
 .sheet-btn {
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
     background: linear-gradient(135deg, var(--color-brown-light) 0%, var(--color-brown-copper) 100%);
     color: var(--color-gold);
     border: none;
@@ -121,7 +130,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition-normal);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     box-shadow: var(--shadow-sm);
 }
 .sheet-btn:hover:not(:disabled) {

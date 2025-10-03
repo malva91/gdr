@@ -1210,76 +1210,38 @@ export class CharacterSheetSystem {
     updateSheetTabs() {
         const sheetControls = document.querySelector('.sheet-controls');
         if (!sheetControls) return;
-        
-        // Remove existing tabs
-        const existingTabs = sheetControls.querySelector('.sheet-tabs');
-        if (existingTabs) {
-            existingTabs.remove();
+
+        // Remove existing tabs wrapper
+        const existingWrapper = sheetControls.querySelector('.sheet-tabs-wrapper');
+        if (existingWrapper) {
+            existingWrapper.remove();
         }
-        
-        // Create tabs container if we have sheets
+
+        // Create wrapper for tabs (if we have sheets)
         if (this.currentSheets.size > 0) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'sheet-tabs-wrapper';
+
             const tabsContainer = document.createElement('div');
             tabsContainer.className = 'sheet-tabs';
-            tabsContainer.style.cssText = `
-                display: flex;
-                gap: 0.5rem;
-                margin-bottom: 1rem;
-                flex-wrap: wrap;
-                padding: 0.5rem;
-                background: rgba(139, 69, 19, 0.2);
-                border-radius: 8px;
-                border: 1px solid #8b4513;
-            `;
-            
+
             this.currentSheets.forEach((sheet, sheetId) => {
                 const tab = document.createElement('button');
                 tab.className = `sheet-tab ${sheetId === this.activeSheetId ? 'active' : ''}`;
                 tab.textContent = sheet.name || 'Scheda';
                 tab.title = sheet.name || 'Scheda';
-                tab.style.cssText = `
-                    padding: 0.75rem 1.25rem;
-                    border: 2px solid #8b4513;
-                    border-radius: 8px;
-                    background: ${sheetId === this.activeSheetId ? 'linear-gradient(135deg, #d4af37 0%, #b8941f 100%)' : 'linear-gradient(135deg, rgba(139, 69, 19, 0.4) 0%, rgba(160, 82, 45, 0.4) 100%)'};
-                    color: ${sheetId === this.activeSheetId ? '#2c1810' : '#d4af37'};
-                    font-family: 'Cinzel', serif;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                    font-size: 0.9rem;
-                    max-width: 150px;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    box-shadow: ${sheetId === this.activeSheetId ? '0 4px 8px rgba(212, 175, 55, 0.3)' : '0 2px 4px rgba(0,0,0,0.2)'};
-                `;
-                
+
                 tab.addEventListener('click', () => {
                     this.switchToSheet(sheetId);
                 });
-                
-                tab.addEventListener('mouseenter', () => {
-                    if (sheetId !== this.activeSheetId) {
-                        tab.style.background = 'linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(184, 148, 31, 0.3) 100%)';
-                        tab.style.transform = 'translateY(-2px)';
-                        tab.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
-                    }
-                });
-                
-                tab.addEventListener('mouseleave', () => {
-                    if (sheetId !== this.activeSheetId) {
-                        tab.style.background = 'linear-gradient(135deg, rgba(139, 69, 19, 0.4) 0%, rgba(160, 82, 45, 0.4) 100%)';
-                        tab.style.transform = 'translateY(0)';
-                        tab.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
-                    }
-                });
-                
+
                 tabsContainer.appendChild(tab);
             });
-            
-            // Insert tabs at the beginning of sheet controls
-            sheetControls.insertBefore(tabsContainer, sheetControls.firstChild);
+
+            wrapper.appendChild(tabsContainer);
+
+            // Insert tabs wrapper at the beginning of sheet controls
+            sheetControls.insertBefore(wrapper, sheetControls.firstChild);
         }
     }
     
