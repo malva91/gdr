@@ -85,17 +85,19 @@
         flex: 0 0 35%;
     }
 
-    .master-panel {
-        height: 60vh;
+    .master-panel-content {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto repeat(7, 1fr);
+        padding: var(--spacing-md);
     }
 
-    .asset-libraries {
-        flex-direction: column;
-        gap: var(--spacing-md);
+    .asset-library.music-library {
+        grid-column: 1;
     }
 
     .quick-actions {
-        justify-content: center;
+        grid-column: 1;
+        flex-wrap: wrap;
     }
 
     .section-header {
@@ -184,12 +186,6 @@
         min-width: auto;
     }
 
-    .asset-actions {
-        flex-direction: column;
-        flex-wrap: nowrap;
-        width: 100%;
-    }
-
     .library-asset {
         flex-direction: column;
         align-items: flex-start;
@@ -200,6 +196,11 @@
     }
 
     .asset-info {
+        width: 100%;
+    }
+
+    .asset-actions {
+        flex-direction: column;
         width: 100%;
     }
 

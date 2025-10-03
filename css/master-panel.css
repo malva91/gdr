@@ -1,51 +1,40 @@
 /* Master Panel Styles (token-based) */
 .master-panel {
     position: fixed;
-    inset: auto 0 0 0;
-    height: 50vh;
-    background: linear-gradient(135deg, var(--color-brown-light) 0%, var(--color-brown-medium) 100%);
-    border-top: calc(var(--spacing-xs) * 0.75) solid var(--color-brown-copper); /* ≈3px */
-    box-shadow: var(--shadow-lg);
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
     z-index: var(--z-index-modal);
     display: none;
-    flex-direction: column;
-    transform: translateY(100%);
-    transition: transform var(--transition-smooth);
+    opacity: 0;
+    transition: opacity var(--transition-smooth);
 }
 
 .master-panel.panel-open {
-    transform: translateY(0);
+    opacity: 1;
 }
 
 .master-panel-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--spacing-xs);
-    background: linear-gradient(135deg, var(--color-brown-medium) 0%, var(--color-brown-dark) 100%);
-    border-bottom: 1px solid var(--color-brown-copper);
-    flex-shrink: 0;
-    max-height: fit-content;
+    position: absolute;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    z-index: 10;
 }
 
-.master-panel-header h3 {
-    font-family: var(--font-decorative);
-    font-size: 1.3rem;
-    color: var(--color-gold);
-    /* niente text-shadow hardcoded */
-}
 
 .close-panel-btn {
     background: var(--color-error-dark);
     color: var(--color-gold);
     border: none;
     border-radius: var(--border-radius-round);
-    width: auto;
-    height: auto;
-    font-size: 0.85rem;
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
     cursor: pointer;
     transition: var(--transition-normal);
-    padding: var(--spacing-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
 }
 .close-panel-btn:hover {
     background: var(--color-red-brown);
@@ -53,21 +42,23 @@
 }
 
 .master-panel-content {
-    flex: 1;
-    padding: var(--spacing-sm);
+    width: 100%;
+    height: 100%;
+    padding: var(--spacing-xl);
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xl);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto 1fr 1fr 1fr;
+    gap: var(--spacing-lg);
 }
 
 /* Quick Actions */
 .quick-actions {
+    grid-column: 1 / -1;
     display: flex;
     gap: var(--spacing-lg);
-    flex-wrap: wrap;
-    padding-bottom: var(--spacing-md);
-    border-bottom: 1px solid var(--color-brown-copper);
+    justify-content: center;
+    padding: var(--spacing-md);
 }
 
 .quick-action-btn {
@@ -103,53 +94,59 @@
     background: linear-gradient(135deg, var(--color-error) 0%, var(--color-error-dark) 100%);
 }
 
+/* Asset Libraries - Music Row */
+.asset-library.music-library {
+    grid-column: 1 / -1;
+}
+
 /* Asset Libraries */
 .asset-libraries {
-    display: flex;
-    gap: var(--spacing-xl);
-    flex: 1;
-    min-height: 0;
+    display: contents;
 }
 
 .asset-library {
-    flex: 1;
     display: flex;
     flex-direction: column;
     background: var(--color-bg-card);
-    border: 1px solid var(--color-brown-copper);
-    border-radius: var(--border-radius-md);
+    border: 2px solid var(--color-brown-copper);
+    border-radius: var(--border-radius-lg);
     overflow: hidden;
+    min-height: 0;
 }
 
 .library-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--spacing-md);
+    padding: var(--spacing-lg);
     background: linear-gradient(135deg, var(--color-brown-medium) 0%, var(--color-brown-dark) 100%);
-    border-bottom: 1px solid var(--color-brown-copper);
+    border-bottom: 2px solid var(--color-brown-copper);
+    flex-shrink: 0;
 }
 
 .library-header h4 {
     color: var(--color-gold);
     font-family: var(--font-decorative);
-    font-size: 1.1rem;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
 }
 
 .library-count {
     background: var(--color-brown-light);
     color: var(--color-gold);
-    padding: var(--spacing-xs) var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-lg);
     border-radius: var(--border-radius-xl);
-    font-size: 0.8rem;
-    font-weight: 600;
-    min-width: calc(var(--spacing-lg) * 0.9);
+    font-size: 1.2rem;
+    font-weight: 700;
+    min-width: 40px;
     text-align: center;
 }
 
 .library-content {
     flex: 1;
-    padding: var(--spacing-md);
+    padding: var(--spacing-lg);
     overflow-y: auto;
     min-height: 0;
 }
