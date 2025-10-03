@@ -1171,10 +1171,9 @@ createAssetLibraryElement(assetType, asset) {
     // Open panel
     openPanel() {
         if (!this.authManager.isMaster()) return;
-        
+
         const panel = document.getElementById('masterPanel');
         if (panel) {
-            panel.style.display = 'flex';
             setTimeout(() => {
                 panel.classList.add('panel-open');
             }, 10);
@@ -1187,9 +1186,6 @@ createAssetLibraryElement(assetType, asset) {
         const panel = document.getElementById('masterPanel');
         if (panel) {
             panel.classList.remove('panel-open');
-            setTimeout(() => {
-                panel.style.display = 'none';
-            }, 300);
             this.isOpen = false;
         }
     }
