@@ -54,17 +54,13 @@
 }
 
 .master-panel-content {
-    flex: 1 1 auto;
-    padding: var(--spacing-md);
+    flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
     min-height: 0;
-    height: 0;
     position: relative;
     background: transparent;
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-xl) var(--spacing-md);
 }
 
 /* Quick Actions */
@@ -72,9 +68,9 @@
     display: flex;
     gap: var(--spacing-md);
     justify-content: center;
-    padding: var(--spacing-sm);
+    padding: 0 0 var(--spacing-md) 0;
     flex-wrap: wrap;
-    flex-shrink: 0;
+    margin-bottom: var(--spacing-md);
 }
 
 .quick-action-btn {
@@ -115,11 +111,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-md);
-    grid-auto-rows: auto;
-    flex: 1 1 auto;
-    min-height: 0;
-    align-content: start;
-    padding-bottom: var(--spacing-md);
+    grid-auto-rows: min-content;
 }
 
 /* Asset Libraries - Music Row */
@@ -134,8 +126,7 @@
     border: 2px solid var(--color-brown-copper);
     border-radius: var(--border-radius-md);
     overflow: hidden;
-    min-height: auto;
-    max-height: fit-content;
+    height: fit-content;
 }
 
 .asset-library.collapsed {
@@ -198,7 +189,7 @@
     padding: var(--spacing-md);
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: 300px;
+    max-height: 250px;
     display: block;
     transition: max-height var(--transition-normal), padding var(--transition-normal);
 }
