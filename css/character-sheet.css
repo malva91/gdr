@@ -7,7 +7,7 @@
 }
 
 .character-sheet-content {
-    display: table-cell;
+    display: flex;
     flex-direction: column;
     gap: var(--spacing-lg);
     height: 100%;
