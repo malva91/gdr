@@ -227,18 +227,23 @@ export class ChatSystem {
     async cleanupOldMessages(room, messages) {
         if (messages.length > this.maxMessages) {
             const messagesToDelete = messages.slice(this.maxMessages);
-            
+
+            // Batch delete to avoid too many Firebase operations
+            const deletePromises = [];
+
             for (const message of messagesToDelete) {
                 try {
                     // Find and remove the message by its data
                     const messagesRef = FirebaseHelper.getRoomMessagesRef(room);
                     const snapshot = await messagesRef.once('value');
                     const allMessages = snapshot.val();
-                    
+
                     if (allMessages) {
                         for (const [key, value] of Object.entries(allMessages)) {
-                            if (value.id === message.id) {
-                                await FirebaseHelper.removeData(`rooms/${room}/messages/${key}`);
+                            if (value && value.id === message.id) {
+                                deletePromises.push(
+                                    FirebaseHelper.removeData(`rooms/${room}/messages/${key}`)
+                                );
                                 break;
                             }
                         }
@@ -246,6 +251,11 @@ export class ChatSystem {
                 } catch (error) {
                     console.error('❌ Errore pulizia messaggio vecchio:', error);
                 }
+            }
+
+            // Execute all deletes
+            if (deletePromises.length > 0) {
+                await Promise.allSettled(deletePromises);
             }
         }
     }

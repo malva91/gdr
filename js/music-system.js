@@ -426,6 +426,14 @@ export class MusicSystem {
             
             if (!trackData) {
                 console.warn('⚠️ Traccia non trovata con ID:', trackId);
+
+                // Clean up if track not found
+                this.currentTrack = null;
+                if (this.audioElement) {
+                    this.audioElement.pause();
+                    this.audioElement.src = '';
+                }
+                this.updateTrackDisplay();
                 return;
             }
             

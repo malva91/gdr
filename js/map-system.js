@@ -110,6 +110,7 @@ export class MapSystem {
     // FIXED: Handle map update with perfect fitting for all aspect ratios
     handleMapUpdate(snapshot) {
         if (this.isMapChanging) {
+            console.log('⏳ Cambio mappa già in corso, ignorando aggiornamento');
             return;
         }
         
@@ -135,17 +136,24 @@ export class MapSystem {
                     mapImage.src = mapData.url;
                     mapImage.style.display = 'block';
                     noMapDiv.style.display = 'none';
-                    
+
                     // Wait for image to be rendered, then calculate and apply transforms
                     setTimeout(() => {
-                        this.calculateOptimalZoom();
-                        this.centerMapInViewport();
-                        this.isMapChanging = false;
+                        try {
+                            this.calculateOptimalZoom();
+                            this.centerMapInViewport();
+                        } catch (error) {
+                            console.error('❌ Errore durante calcolo zoom/centratura:', error);
+                        } finally {
+                            this.isMapChanging = false;
+                        }
                     }, 100);
                 };
-                
+
                 img.onerror = () => {
                     console.error('❌ Errore caricamento immagine mappa');
+                    mapImage.style.display = 'none';
+                    noMapDiv.style.display = 'block';
                     this.isMapChanging = false;
                 };
                 

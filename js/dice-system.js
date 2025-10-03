@@ -134,10 +134,20 @@ export class DiceSystem {
     // Roll all dice
     async rollAllDice() {
         if (this.diceGroups.length === 0) return;
-        
+
+        // Validate that we have at least one valid group
+        const hasValidGroups = this.diceGroups.some(group =>
+            group && group.count > 0 && group.type
+        );
+
+        if (!hasValidGroups) {
+            console.warn('⚠️ Nessun gruppo dadi valido per il lancio');
+            return;
+        }
+
         const user = this.authManager.getCurrentUser();
         const room = this.authManager.getCurrentRoom();
-        
+
         if (!user || !room) {
             console.error('❌ Utente o stanza non disponibili per lancio dadi');
             return;

@@ -53,10 +53,14 @@ export class TokenSystem {
     // FIXED: Start smooth update loop for ultra-fluid movement
     startSmoothUpdateLoop() {
         const updateLoop = () => {
+            // Only update if actively dragging
             if (this.isDragging && this.selectedToken) {
                 this.updateTokenPositionSmooth();
+                this.animationFrame = requestAnimationFrame(updateLoop);
+            } else {
+                // Schedule next check only if not dragging to save resources
+                this.animationFrame = setTimeout(() => requestAnimationFrame(updateLoop), 100);
             }
-            this.animationFrame = requestAnimationFrame(updateLoop);
         };
         updateLoop();
     }
@@ -905,13 +909,14 @@ export class TokenSystem {
             FirebaseHelper.stopListening(this.tokensListener);
             this.tokensListener = null;
         }
-        
-        // Cancel animation frame
+
+        // Cancel animation frame and timeout
         if (this.animationFrame) {
             cancelAnimationFrame(this.animationFrame);
+            clearTimeout(this.animationFrame);
             this.animationFrame = null;
         }
-        
+
         this.cancelTokenFollow();
     }
 }
