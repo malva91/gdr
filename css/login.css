@@ -1,0 +1,202 @@
+/* Login Screen Styles */
+.login-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #2c1810 0%, #1a0f08 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.img-logo {
+  display: block;      /* si comporta come blocco */
+  width: 100px;        /* o la dimensione che preferisci */
+  height: auto;        /* mantiene le proporzioni */
+  margin: 0 auto;      /* centratura orizzontale */
+}
+
+/* Custom File Input Button */
+.file-input {
+    font: inherit;                  /* eredita font famiglia e peso */
+    color: #d4af37;                 /* colore testo coerente */
+    background: transparent;        /* trasparente dietro al button */
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Browser moderni */
+.file-input::file-selector-button {
+    background: #8b4513;            /* marrone scuro */
+    color: #d4af37;                 /* dorato */
+    border: 1px solid #d4af37;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+.file-input::file-selector-button:hover {
+    background: #a0522d;            /* marrone medio */
+    transform: translateY(-1px);
+}
+
+/* Fallback WebKit */
+.file-input::-webkit-file-upload-button {
+    background: #8b4513;
+    color: #d4af37;
+    border: 1px solid #d4af37;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+.file-input::-webkit-file-upload-button:hover {
+    background: #a0522d;
+    transform: translateY(-1px);
+}
+
+/* Nascondi il testo di default "Nessun file scelto" */
+.file-input::-webkit-file-upload-text {
+    visibility: hidden;
+}
+
+
+
+
+.login-container {
+    background: rgba(44, 24, 16, 0.95);
+    border: 3px solid #8b4513;
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.tavern-logo {
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #8b4513;
+    padding-bottom: 1rem;
+}
+
+.tavern-logo h1 {
+    font-family: 'Uncial Antiqua', serif;
+    font-size: 1.8rem;
+    color: #d4af37;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+.tavern-logo p {
+    font-size: 0.9rem;
+    color: #cd853f;
+    font-style: italic;
+}
+
+.role-switch {
+    display: flex;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #8b4513;
+}
+
+.role-tab {
+    flex: 1;
+    padding: 0.75rem;
+    background: #3d2716;
+    color: #cd853f;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+}
+
+.role-tab.active {
+    background: #8b4513;
+    color: #d4af37;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.role-tab:hover:not(.active) {
+    background: #4a2f1d;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #d4af37;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    min-height: 10px;
+    padding: 0.2rem;
+    background: #2c1810;
+    border: 2px solid #8b4513;
+    border-radius: 6px;
+    color: #d4af37;
+    font-family: 'Cinzel', serif;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #d4af37;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+.avatar-preview {
+    margin-top: 0.5rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #8b4513;
+    background: #2c1810;
+    display: none;
+    background-size: cover;
+    background-position: center;
+}
+
+.enter-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+    color: #d4af37;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.enter-btn:hover {
+    background: linear-gradient(135deg, #a0522d 0%, #8b4513 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+}
+

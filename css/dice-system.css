@@ -1,0 +1,163 @@
+/* Dice System Styles */
+.dice-controls {
+    margin-bottom: 1.5rem;
+}
+
+.dice-groups {
+    margin-bottom: 1rem;
+}
+
+.dice-group {
+    background: linear-gradient(135deg, rgba(61, 39, 22, 0.85) 0%, rgba(44, 24, 16, 0.85) 100%);
+    border: 2px solid rgba(139, 69, 19, 0.7);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+}
+
+.dice-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.group-title {
+    font-weight: 600;
+    color: #d4af37;
+}
+
+.remove-group {
+    background: #8b0000;
+    color: #d4af37;
+    border: none;
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.dice-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.dice-count {
+    width: 50px;
+    padding: 0.5rem;
+    background: rgba(44, 24, 16, 0.9);
+    border: 1.5px solid rgba(139, 69, 19, 0.6);
+    border-radius: 6px;
+    color: #d4af37;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.dice-count:focus {
+    outline: none;
+    border-color: #d4af37;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+}
+
+.dice-type {
+    padding: 0.5rem;
+    background: rgba(44, 24, 16, 0.9);
+    border: 1.5px solid rgba(139, 69, 19, 0.6);
+    border-radius: 6px;
+    color: #d4af37;
+    min-width: 70px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.dice-type:focus {
+    outline: none;
+    border-color: #d4af37;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+}
+
+.dice-color {
+    width: 40px;
+    height: 35px;
+    border: 1px solid #8b4513;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modifier-input {
+    width: 60px;
+    padding: 0.5rem;
+    background: rgba(44, 24, 16, 0.9);
+    border: 1.5px solid rgba(139, 69, 19, 0.6);
+    border-radius: 6px;
+    color: #d4af37;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.modifier-input:focus {
+    outline: none;
+    border-color: #d4af37;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+}
+
+.dice-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.add-group-btn,
+.roll-btn {
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: fit-content;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+}
+
+.add-group-btn {
+    background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+    color: #d4af37;
+    flex: 1;
+}
+
+.roll-btn {
+    background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+    color: #d4af37;
+    flex: 2;
+}
+
+.roll-btn:disabled {
+    background: #555;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.add-group-btn:hover {
+    background: linear-gradient(135deg, #32cd32 0%, #228b22 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(50, 205, 50, 0.4);
+}
+
+.roll-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #a0522d 0%, #cd7f32 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+}
+

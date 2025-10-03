@@ -1,0 +1,292 @@
+/* Chat and Dice Results Combined Section */
+.chat-section {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Music Player at top */
+.music-player {
+    flex: 0 0 auto;
+}
+
+/* Chat and Dice Results Container */
+.chat-dice-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+}
+
+/* Dice Results Section */
+.dice-results-section {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, rgba(61, 39, 22, 0.9) 0%, rgba(44, 24, 16, 0.9) 100%);
+    border-bottom: 2px solid rgba(139, 69, 19, 0.7);
+    min-height: 0;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dice-results-header {
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, #3d2716 0%, #2c1810 100%);
+    border-bottom: 2px solid #8b4513;
+    flex-shrink: 0;
+}
+
+.dice-results-header h4 {
+    color: #d4af37;
+    font-family: 'Uncial Antiqua', serif;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.dice-results-content {
+    flex: 1;
+    padding: 0.75rem;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+/* Chat Section */
+.chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.no-messages {
+    text-align: center;
+    color: #cd853f;
+    font-style: italic;
+    padding: 2rem;
+}
+
+.chat-message {
+    background: linear-gradient(135deg, rgba(61, 39, 22, 0.7) 0%, rgba(44, 24, 16, 0.7) 100%);
+    border: 1.5px solid rgba(139, 69, 19, 0.5);
+    border-radius: 10px;
+    padding: 0.85rem;
+    margin-bottom: 0.65rem;
+    border-left: 4px solid #8b4513;
+    backdrop-filter: blur(2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    animation: messageSlideIn 0.3s ease-out;
+}
+
+.chat-message:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transform: translateX(2px);
+}
+
+@keyframes messageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.message-avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #8b4513;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    background-size: cover;
+    background-position: center;
+}
+
+.message-user {
+    font-weight: 600;
+    color: #d4af37;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.message-time {
+    font-size: 0.8rem;
+    color: #cd853f;
+    margin-left: auto;
+}
+
+.message-text {
+    color: #d4af37;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.chat-input {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(135deg, rgba(61, 39, 22, 0.95) 0%, rgba(44, 24, 16, 0.95) 100%);
+    border-top: 2px solid rgba(139, 69, 19, 0.7);
+    flex-shrink: 0;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+}
+
+#messageInput {
+    flex: 1;
+    padding: 0.85rem 1rem;
+    background: rgba(44, 24, 16, 0.9);
+    border: 2px solid rgba(139, 69, 19, 0.6);
+    border-radius: 8px;
+    color: #d4af37;
+    font-family: 'Cinzel', serif;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+#messageInput:focus {
+    outline: none;
+    border-color: #d4af37;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+    background: rgba(44, 24, 16, 1);
+}
+
+.send-btn {
+    padding: 0.85rem 1.25rem;
+    background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+    color: #d4af37;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1.2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.send-btn:hover {
+    background: linear-gradient(135deg, #a0522d 0%, #cd7f32 100%);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+}
+
+/* Dice Results Styles */
+.no-results {
+    text-align: center;
+    color: #cd853f;
+    font-style: italic;
+    padding: 1rem;
+}
+
+.dice-result {
+    background: rgba(61, 39, 22, 0.6);
+    border: 1px solid #8b4513;
+    border-radius: 6px;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border-left: 4px solid;
+}
+
+.result-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.result-avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #8b4513;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    background-size: cover;
+    background-position: center;
+}
+
+.result-user {
+    font-weight: 600;
+    color: #d4af37;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.result-time {
+    font-size: 0.8rem;
+    color: #cd853f;
+    margin-left: auto;
+}
+
+.result-groups {
+    margin-bottom: 0.5rem;
+}
+
+.result-group {
+    margin-bottom: 0.25rem;
+}
+
+.group-dice {
+    display: inline-flex;
+    gap: 0.25rem;
+    margin-right: 0.5rem;
+}
+
+.die-value {
+    display: inline-block;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 25px;
+    text-align: center;
+}
+
+.die-value.critical-success {
+    background: #228b22;
+    color: #fff;
+    box-shadow: 0 0 8px rgba(34, 139, 34, 0.6);
+}
+
+.die-value.critical-failure {
+    background: #8b0000;
+    color: #fff;
+    box-shadow: 0 0 8px rgba(139, 0, 0, 0.6);
+}
+
+.result-total {
+    font-weight: 700;
+    color: #d4af37;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 0.5rem;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 4px;
+}
+

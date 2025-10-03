@@ -1,0 +1,104 @@
+/* Sound Board Styles */
+.sound-board {
+    background: linear-gradient(135deg, rgba(61, 39, 22, 0.9) 0%, rgba(44, 24, 16, 0.9) 100%);
+    border-bottom: 2px solid rgba(139, 69, 19, 0.7);
+    padding: 0.75rem;
+    flex-shrink: 0;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.sound-board-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.sound-board-header h4 {
+    color: #d4af37;
+    font-family: 'Uncial Antiqua', serif;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.sound-buttons {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    gap: 2px;
+    justify-items: center;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* FIXED: Sound button container with play and stop buttons */
+.sound-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin: 1px;
+}
+
+.sound-button {
+    border: 2px solid rgba(139, 69, 19, 0.7);
+    border-radius: 7px;
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
+    padding: 2px;
+    position: relative;
+    overflow: hidden;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.sound-button.play-button {
+    width: 50px;
+    height: 40px;
+    font-size: 0.6rem;
+}
+
+.sound-button.stop-button {
+    width: 30px;
+    height: 20px;
+    font-size: 0.7rem;
+    background: linear-gradient(135deg, #8b0000 0%, #a52a2a 100%);
+    border: 1px solid #8b4513;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.sound-button:hover {
+    transform: scale(1.08) translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border-color: rgba(212, 175, 55, 0.5);
+}
+
+.sound-button:active {
+    transform: scale(0.95);
+}
+
+/* Sound Button Pulse Animation */
+@keyframes soundButtonPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
